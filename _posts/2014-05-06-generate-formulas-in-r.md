@@ -35,7 +35,7 @@ print(binary)
 # TRUE FALSE FALSE 
 ```
 
-`apply()` found all columns whose elements only consist of 0 and 1. Now we can subset the data using this logical vector. We want the continuous variables, though, so we use `!`:
+`apply()` found all columns whose elements consist only of 0 and 1. Now we can subset the data using this logical vector. We want the continuous variables, though, so we use `!`:
 
 ```r
 print(df[!binary])
@@ -53,7 +53,7 @@ print(df[!binary])
 # 20 30
 ```
 
-Column `z` was not printed because it is not binary (`!binary`).
+Column `x` was not printed because it is not binary (`!binary`).
 
 Now we can write a function that scales only the continuous variables in a data frame.
 
