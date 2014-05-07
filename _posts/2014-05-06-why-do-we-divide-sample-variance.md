@@ -2,76 +2,18 @@
 layout: default
 title: Why do we divide by n - 1 when calculating the sample variance?
 ---
+In my marketing class the other day, the professor briefly touched on why we divide by \\( n - 1 \\) when calculating the sample variance. He explained that we divide by \\( n - 1 \\), rather than \\( n \\), because we've "lost a degree of freedom." I'd like to go a little deeper into why this is so, because I think it is actually quite intuitive and should be understood beyond the explanation of "dividing by \\( n - 1 \\) makes the sample variance an unbiased estimate of the population variance."
 
-### Test!
+For the purposes of calculating a statistic, the [degrees of freedom](http://en.wikipedia.org/wiki/Degrees_of_freedom) can be thought of as "the number of independent pieces of information that go into the estimate of a parameter." In short, we need to know all n observations in order to calculate the sample mean, but we only need to know \( n - 1 \\) of the residuals,
 
-text text
+\\[ x_{i} - \bar{x} \\]
 
-```python
-x = [1,2,3]
-```
+in order to calculate the sample variance.
 
-```r
-library(Rneo4j)
+Consider the following sample of \\( n = 3 \\) observations:
 
-graph = startGraph("http://localhost:7474/db/data/")
-version(graph)
+\\[ x_1 = 3 \\
+	x_2 = 4 \\
+	x_3 = 5 \\]
 
-# Clear the database.
-clear(graph)
-
-# Add uniqueness constraint to Person nodes based on the name property.
-addUnique(graph, "Person", "name")
-
-# Create nodes for Alice, Bob, and Charles. We forget to assign Charles to a node object,
-# but we take care of that later.
-
-# Create nodes with properties.
-alice = createNode(graph, c(name = "Alice", age = 20))
-bob = createNode(graph, c(name = "Bob", age = 24))
-
-# Create node with properties and Person label.
-createNode(graph, c(name = "Charles", age = 19), "Person")
-
-# Nodes can have multiple labels.
-addLabel(alice, c("Person", "Student"))
-addLabel(bob, "Person")
-
-# Create a [:KNOWS] relationship between Alice and Bob with the given properties.
-createRel(alice, "KNOWS", bob, c(since = 2000, through = "School"))
-
-# Retrieve the node object for Charles.
-charles = getNode(graph, "MATCH (n:Person {name:'Charles'}) RETURN n")
-
-# To view a node object's properties, execute node$data:
-charles$data
-
-# $name
-# [1] "Charles"
-#
-# $age
-# [1] 19
-
-# Create a [:KNOWS] relationship between Alice and Charles with the given properties.
-rel = createRel(alice, "KNOWS", charles, c(since = 2004, through = "Work"))
-
-# It's Alice's birthday!
-alice = updateProps(alice, c(age = 21))
-
-# Delete the "through" property on the relationship between Alice and Charles.
-rel = deleteProps(rel, "through")
-
-# Get a dataframe of Cypher query results.
-df = cypher(graph, "MATCH n RETURN n.name, n.age")
-
-print(df)
-# 	 n.name n.age
-# 1   Alice    21
-# 2     Bob    24
-# 3 Charles    19
-```
-
-mathjax maybe
-
-Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering: 
-\\[ \frac{1}{n^{2}} \\]
+test
