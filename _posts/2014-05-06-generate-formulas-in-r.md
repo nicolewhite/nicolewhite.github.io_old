@@ -7,7 +7,9 @@ title: Scale only the continuous variables in an R data frame.
 When performing a logistic regression, it is often that your dataset consists of a mixture of continuous and binary variables. In order to avoid numerically-unstable estimation, it is desirable to scale the continous variables in your dataset while leaving the binary variables alone. Consider the following data frame:
 
 ```r
-df = data.frame(x = c(rep(0, 5), rep(1, 5)), y = 11:20, z = 21:30)
+df = data.frame(x = c(rep(0, 5), rep(1, 5)), 
+                y = 11:20, 
+                z = 21:30)
 
 print(df)
 
