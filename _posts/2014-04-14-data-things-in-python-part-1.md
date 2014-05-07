@@ -14,7 +14,6 @@ import csv
 from bs4 import BeautifulSoup
 import string
 from unidecode import unidecode
-
 ```
 
 ## Get name, location, and status for each airline.
