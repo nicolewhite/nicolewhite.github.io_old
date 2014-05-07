@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Data Things in Python Part I: Data Collection
+title: Data Things in Python Part I - Data Collection
 ---
 Scrape Data from the Internet Using BeautifulSoup
 =================================================
