@@ -21,5 +21,4 @@ In your `R` environment, execute the following:
 ```r
 install.packages("devtools")
 devtools::install_github("nicolewhite/Rneo4j")
-library(Rneo4j)
 ```
