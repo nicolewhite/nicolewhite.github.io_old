@@ -11,8 +11,8 @@ The community edition of Neo4j can be installed on Windows, Mac, or Linux. All r
 Details on installing and starting Neo4j for each operating system:
 
 * [Windows](http://docs.neo4j.org/chunked/stable/server-installation.html#windows-install)
-* [Linux](http://docs.neo4j.org/chunked/stable/server-installation.html#linux-install)
 * [Mac OSX](http://docs.neo4j.org/chunked/stable/server-installation.html#osx-install)
+* [Linux](http://docs.neo4j.org/chunked/stable/server-installation.html#linux-install)
 
 ## Install Rneo4j
 
