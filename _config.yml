@@ -1,4 +1,6 @@
 markdown: redcarpet
-url: http://nicolewhite.github.io
+redcarpet:
+  extensions: ["tables"]
+url: http://localhost:4000
 source: C:\Users\Nicole\Documents\GitHub\nicolewhite.github.io
 destination: C:\Users\Nicole\Desktop\_site

@@ -1,17 +1,17 @@
 ---
-layout: default
-title: startGraph()
+layout: rneo4j
+title: startGraph
 ---
 
-# Connect to the graph database.
-
-### `startGraph()`
+### `startGraph`
 
 #### Usage
 `startGraph(url)`
 
 #### Arguments
-`url`    A string.
+| Parameter | Description |
+| --------- | ----------- |
+| `url`     | The URL of the graph database. Accepts a string.  |
 
 #### Output
 A graph object.
@@ -23,4 +23,3 @@ To get started, you will need the URL of your graph database. If you are running
 ```r
 graph = startGraph("http://localhost:7474/db/data")
 ```
-
