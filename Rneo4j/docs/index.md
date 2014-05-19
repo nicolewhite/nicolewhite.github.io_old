@@ -8,7 +8,7 @@ layout: rneo4j
 | -------------------------------------------- | ---------------------------------------- |
 | [`startGraph`](start-graph.html)             | Connect to the Database                  |
 | [`addConstraint`](add-constraint.html)       | Uniqueness Constraints                   |
-| [`getConstraint`](getc-constraint.html)      | Uniqueness Constraints                   |
+| [`getConstraint`](get-constraint.html)       | Uniqueness Constraints                   |
 | [`dropConstraint`](drop-constraint.html)     | Uniqueness Constraints                   |
 | [`addIndex`](add-index.html)                 | Indexes                                  |
 | [`getIndex`](get-index.html)                 | Indexes                                  |
