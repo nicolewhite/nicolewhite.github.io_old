@@ -3,22 +3,24 @@ title: clear
 layout: rneo4j
 ---
 
-### `clear`
+`clear`
 
-#### Description
+# Clear the Database
+
+## Description
 Delete all nodes, relationships, constraints, and indexes from the graph database. Requires answering a prompt.
 
-#### Usage
+## Usage
 ```r
 clear(graph)
 ```
 
-#### Arguments
+## Arguments
 | Parameter | Description | 
 | --------- | ----------- |
 | `graph`   | The graph object to be cleared. |
 
-#### Example
+## Example
 ```r
 clear(graph)
 ```

@@ -3,7 +3,7 @@ layout: rneo4j
 ---
 
 # Example
-```
+```r
 library(Rneo4j)
 
 graph = startGraph("http://localhost:7474/db/data/")

@@ -127,6 +127,7 @@ method2 = function(year) {
 ```
 
 The results of the two above methods are identical, but doing things in Cypher is almost always faster:
+
 ```r
 system.time(method1(year))
 # user  system elapsed 
@@ -146,7 +147,7 @@ graph = startGraph("http://localhost:7474/db/data/")
 populate(graph, "fleets")
 ```
 
-### Database structure.
+### Database Structure
 
 Executing `summary()` on the graph object gives you a high level overview of the structure of the database, and `getIndex()` and `getConstraint()` will tell you if there are any indexes or constraints present:
 
