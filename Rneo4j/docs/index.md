@@ -17,10 +17,10 @@ layout: rneo4j
 | [`addLabel`](add-label.html)                 | Node Labels                              |
 | [`getLabel`](get-label.html)                 | Node Labels                              |
 | [`dropLabel`](drop-label.html)               | Node Labels                              |
-| [`getNodeByCypher`](get-node-by-cypher.html) | Retrieve Nodes from the Database         |
-| [`getNodeByIndex`](get-node-by-index.html)   | Retrieve Nodes from the Database         |
+| [`getNodeByCypher`](get-node-by-cypher.html) | Retrieve Nodes from the Graph Database         |
+| [`getNodeByIndex`](get-node-by-index.html)   | Retrieve Nodes from the Graph Database         |
 | [`createRel`](create-rel.html)               | Create Relationships                     |
-| [`getRelByCypher`](get-rel-by-cypher.html)   | Retrieve Relationships from the Database |
+| [`getRelByCypher`](get-rel-by-cypher.html)   | Retrieve Relationships from the Graph Database |
 | [`getStart`](get-start.html)                 | Retrieve Nodes from Relationships        |
 | [`getEnd`](get-end.html)                     | Retrieve Nodes from Relationships        |
 | [`updateProp`](update-prop.html)             | Update Node and Relationship Properties  |
