@@ -21,6 +21,7 @@ getIndex(graph, label = character())
 
 | Parameter | Description     |
 | --------- | --------------- |
+| `graph`   | A graph object. |
 | `label`   | The label for which to view all indexes. |
 
 ## Output

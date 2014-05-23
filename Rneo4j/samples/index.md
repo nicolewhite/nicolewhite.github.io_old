@@ -4,7 +4,7 @@ layout: rneo4j
 
 # Sample Datasets
 
-If you don't have your own data, sample datasets can be loaded through `populate()`. Using `populate()` clears the graph database of all nodes, relationships, constraints, and indices, then populates the database with the sample dataset. You will be prompted to make sure that that is what you want to do.
+If you don't have your own data, sample datasets can be loaded through [`populate`](../docs/populate.html). This clears the graph database of all nodes, relationships, constraints, and indices, then populates the database with the sample dataset. You will be prompted to make sure that that is what you want to do.
 
 ## Movies
 
@@ -17,7 +17,7 @@ populate(graph, "movies")
 
 ### Database Structure
 
-Executing `summary()` on the graph object gives you a high level overview of the structure of the database, and `getIndex()` and `getConstraint()` will tell you if there are any indexes or constraints present:
+Executing `summary` on the graph object gives you a high level overview of the structure of the database, and [`getIndex`](../docs/get-index.html) and [`getConstraint`](../docs/get-constraint.html) will tell you if there are any indexes or constraints present:
 
 ```r
 summary(graph)
@@ -55,7 +55,7 @@ The node and relationship properties are summarized below.
 
 ### Example
 
-Because an index does not exist, you can't use `getNodeByIndex()` yet. But, you can start retrieving nodes using `getNodeByCypher()`:
+Because an index does not exist, you can't use [`getNodeByIndex`](../docs/get-node-by-index.html) yet. But, you can start retrieving nodes using [`getNodeByCypher`](get-node-by-cypher.html):
 
 ```r
 query = "MATCH (p:Person {name:'Tom Hanks'}) RETURN p"
@@ -71,7 +71,7 @@ print(tom)
 # [1] "Tom Hanks"
 ```
 
-To search for nodes using `getNodeByIndex()`, you need to add an index first. This can be done either with `addConstraint()` (preferred, because it also adds an index) or `addIndex()` (adds an index, but no uniqueness constraint).
+To search for nodes using [`getNodeByIndex`](../docs/get-node-by-index.html), you need to add an index first. This can be done either with [`addConstraint`](../docs/add-constraint.html) (preferred, because it also adds an index) or [`addIndex`](../docs/add-index.html) (adds an index, but no uniqueness constraint).
 
 ```r
 addConstraint(graph, "Person", "name")
@@ -110,7 +110,7 @@ method1 = function(year) {
 }
 ```
 
-...or through a combination of `getNodeByIndex()` and `updateProp()`:
+...or through a combination of [`getNodeByIndex`](../docs/get-node-by-index.html) and [`updateProp`](../docs/update-prop.html):
 
 ```r
 method2 = function(year) {

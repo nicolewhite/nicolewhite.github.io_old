@@ -23,7 +23,7 @@ createNode(graph, label = character(), ...)
 | --------- | ----------- |
 | `graph`   | A graph object. |
 | `label`   | An optional node label. Accepts a string or vector of strings. |
-| `...`     | Optional node properties in the form key = value. |
+| `...`     | Optional node properties in the form key = value (separated by commas). |
 
 ## Output
 

@@ -23,7 +23,7 @@ createRel(fromNode, type, toNode, ...)
 | `fromNode` | The node object from which the relationship will be outgoing. |
 | `type` | The type of relationship. Accepts a string (see details). |
 | `toNode` | The node object to which the relationship will be incoming. |
-| `...` | Optional relationship properties in the form key = value. |
+| `...` | Optional relationship properties in the form key = value (separated by commas). |
 
 ## Output
 

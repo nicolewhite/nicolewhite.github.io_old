@@ -1,30 +1,36 @@
 ---
-layout: rneo4j
 title: startGraph
+layout: rneo4j
 ---
 
 `startGraph`
 
-# Connect to the Database
+# Connect to the Graph Database
 
 ## Description
-Connect to the graph database.
+
+Establish a connection to the graph database.
 
 ## Usage
+
 `startGraph(url)`
 
 ## Arguments
+
 | Parameter | Description |
 | --------- | ----------- |
 | `url`     | The URL of the graph database. Accepts a string.  |
 
 ## Output
+
 A graph object.
 
 ## Details
-To get started, you will need the URL of your graph database. If you are running Neo4j locally, it is [http://localhost:7474/db/data](http://localhost:7474/db/data).
 
-## Example
+To get started, you will need the URL of the graph database. If running Neo4j locally, it is [http://localhost:7474/db/data](http://localhost:7474/db/data).
+
+## Examples
+
 ```r
 graph = startGraph("http://localhost:7474/db/data")
 ```
