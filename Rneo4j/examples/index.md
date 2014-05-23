@@ -2,7 +2,7 @@
 layout: rneo4j
 ---
 
-# Example
+# Quick Example
 
 Load `Rneo4j` and establish a connection to the currently-running Neo4j server.
 

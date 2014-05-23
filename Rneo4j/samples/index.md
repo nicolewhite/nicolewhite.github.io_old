@@ -55,7 +55,7 @@ The node and relationship properties are summarized below.
 
 ### Example
 
-Because an index does not exist, you can't use [`getNodeByIndex`](../docs/get-node-by-index.html) yet. But, you can start retrieving nodes using [`getNodeByCypher`](get-node-by-cypher.html):
+Because an index does not exist, you can't use [`getNodeByIndex`](../docs/get-node-by-index.html) yet. But, you can start retrieving nodes using [`getNodeByCypher`](../docs/get-node-by-cypher.html):
 
 ```r
 query = "MATCH (p:Person {name:'Tom Hanks'}) RETURN p"
