@@ -22,8 +22,8 @@ addConstraint(graph, label, key)
 | Parameter | Description     |
 | --------- | --------------- |
 | graph     | A graph object. |
-| label     | The label on which to add the uniqueness constraint. Accepts a string.|
-| key       | The property key that is constrained to be unique. Accepts a string.|
+| label     | A node label on which to add the uniqueness constraint. Accepts a string.|
+| key       | A property key by which the label will be uniquely constrained. Accepts a string. |
 
 ## Details
 
@@ -36,6 +36,9 @@ Attempting to add a uniqueness constraint to data that violates the uniqueness c
 ## Examples
 
 ```r
+createNode(graph, "Person", name = "Alice")
+createNode(graph, "Person", name = "Bob")
+
 addConstraint(graph, "Person", "name")
 ```
 

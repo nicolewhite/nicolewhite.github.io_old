@@ -1,9 +1,9 @@
 ---
-title: getEnd
+title: endNode
 layout: rneo4j
 ---
 
-`getEnd`
+`endNode`
 
 # Retrieve Nodes from Relationships
 
@@ -14,7 +14,7 @@ Retrieve the ending node from a relationship object. This is the node for which 
 ## Usage
 
 ```r
-getEnd(rel)
+endNode(rel)
 ```
 
 ## Arguments
@@ -30,13 +30,19 @@ A node object.
 ## Examples
 
 ```r
-rel = createRel(alice, "KNOWS", bob)
-end = getEnd(rel)
+alice = createNode(graph, "Person", name = "Alice")
+bob = createNode(graph, "Person", name = "Bob")
 
-identical(end, bob)
-# TRUE
+rel = createRel(alice, "works with", bob)
+
+endNode(rel)
+
+# Labels: Person
+#
+# $name
+# [1] "Bob"
 ```
 
 ## See Also
 
-[`getStart`](get-start.html)
+[`startNode`](start-node.html)

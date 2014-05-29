@@ -9,7 +9,7 @@ layout: rneo4j
 
 ## Description
 
-View all uniqueness constraints for a given label or for the entire graph database.
+Get all uniqueness constraints for a given label or for the entire graph database.
 
 ## Usage
 
@@ -22,7 +22,7 @@ getConstraint(graph, label = character())
 | Parameter | Description     |
 | --------- | --------------- |
 | `graph`   | A graph object. |
-| `label`   | The label for which to view all uniqueness constraints. |
+| `label`   | A node label for which to view all uniqueness constraints. Accepts a string. |
 
 ## Output
 
@@ -34,16 +34,34 @@ Supplying only a graph object as an argument returns all uniqueness constraints 
 
 ## Examples
 
-View all uniqueness constraints on the `Person` node label.
+```r
+alice = createNode(graph, "Person", name = "Alice")
+bob = createNode(graph, "Person", name = "Bob")
+
+san_fran = createNode(graph, "City", name = "San Francisco")
+austin = createNode(graph, "City", name = "Austin")
+
+addConstraint(graph, "Person", "name")
+addConstraint(graph, "City", "name")
+```
+
+Get all uniqueness constraints on `Person` nodes.
 
 ```r
 getConstraint(graph, "Person")
+
+#   property_keys  label       type
+# 1          name Person UNIQUENESS
 ```
 
-View all uniqueness constraints in the graph database.
+Get all uniqueness constraints in the graph database.
 
 ```r
 getConstraint(graph)
+
+#   property_keys  label       type
+# 1          name   City UNIQUENESS
+# 2          name Person UNIQUENESS
 ```
 
 ## See Also

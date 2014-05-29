@@ -21,7 +21,7 @@ delete(...)
 
 | Parameter | Description     |
 | --------- | --------------- |
-| `...`     | The node or relationship object(s) to be deleted from the graph database (separated by commas). |
+| `...`     | Node or relationship object(s) to be deleted from the graph database (separated by commas). |
 
 ## Details
 
@@ -30,6 +30,11 @@ Nodes with incoming or outgoing relationships cannot be deleted. All incoming an
 ## Examples
 
 ```r
+alice = createNode(graph, name = "Alice")
+bob = createNode(graph, name = "Bob")
+
+rel = createRel(alice, "works with", bob)
+
 delete(rel)
 delete(alice, bob)
 ```

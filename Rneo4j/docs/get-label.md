@@ -9,7 +9,7 @@ layout: rneo4j
 
 ## Description
 
-View all node labels for a given node object or for the entire graph database.
+Get all node labels for a given node object or for the entire graph database.
 
 ## Usage
 
@@ -21,7 +21,7 @@ getLabel(object)
 
 | Parameter | Description     |
 | --------- | --------------- |
-| `object`  | The object for which to view all node labels. Accepts a node object or a graph object (see details). |
+| `object`  | An object for which to view all node labels. Accepts a node or graph object (see details). |
 
 ## Output
 
@@ -33,16 +33,28 @@ Supplying a graph object returns all node labels in the graph database. Supplyin
 
 ## Examples
 
-View all node labels on the `alice` node.
+```r
+alice = createNode(graph, name = "Alice")
+bob = createNode(graph, name = "Bob")
+
+addLabel(alice, "Student")
+addLabel(bob, "Person", "Student")
+```
+
+Get all labels on the `alice` node.
 
 ```r
 getLabel(alice)
+
+# [1] "Student"
 ```
 
-View all node labels in the graph database.
+Get all node labels in the graph database.
 
 ```r
 getLabel(graph)
+
+# [1] "Student" "Person"
 ```
 
 ## See Also

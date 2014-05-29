@@ -31,7 +31,6 @@ Available Datasets
 | Name | Description | Size |
 | ---- | ----------- | ---- |
 | "movies" | Graph of movies, actors. | 19.55 MB |
-| "fleets" | Graph of airlines, aircraft. | fdsa |
 
 ## Examples
 

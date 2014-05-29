@@ -20,9 +20,9 @@ createRel(fromNode, type, toNode, ...)
 
 | Parameter | Description |
 | --------- | ----------- |
-| `fromNode` | The node object from which the relationship will be outgoing. |
-| `type` | The type of relationship. Accepts a string (see details). |
-| `toNode` | The node object to which the relationship will be incoming. |
+| `fromNode` | A node object from which the relationship will be outgoing. |
+| `type` | A relationship type in the form of a string (see details). |
+| `toNode` | A node object to which the relationship will be incoming. |
 | `...` | Optional relationship properties in the form key = value (separated by commas). |
 
 ## Output
@@ -45,6 +45,12 @@ createRel(alice, "WORKS_WITH", bob)
 
 ## Examples
 
+```r
+alice = createNode(graph, "Person", name = "Alice")
+bob = createNode(graph, "Person", name = "Bob")
+charles = createNode(graph, "Person", name = "Charles")
+```
+
 Relationship without properties.
 
 ```r
@@ -58,4 +64,4 @@ rel = createRel(alice, "works with", charles, since = 2000, through = "Work")
 ```
 
 ## See Also
-[`getStart`](get-start.html), [`getEnd`](get-end.html)
+[`startNode`](start-node.html), [`endNode`](end-node.html)

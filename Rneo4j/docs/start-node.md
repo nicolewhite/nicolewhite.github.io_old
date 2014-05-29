@@ -1,9 +1,9 @@
 ---
-title: getStart
+title: startNode
 layout: rneo4j
 ---
 
-`getStart`
+`startNode`
 
 # Retrieve Nodes from Relationships
 
@@ -14,7 +14,7 @@ Retrieve the starting node from a relationship object. This is the node for whic
 ## Usage
 
 ```r
-getStart(rel)
+startNode(rel)
 ```
 
 ## Arguments
@@ -39,4 +39,4 @@ identical(start, alice)
 
 ## See Also
 
-[`getEnd`](get-end.html)
+[`endNode`](end-node.html)

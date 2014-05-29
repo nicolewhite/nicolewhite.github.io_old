@@ -22,8 +22,8 @@ addIndex(graph, label, key)
 | Parameter | Description |
 | --------- | ----------- |
 | `graph`   | A graph object. |
-| `label`   | The label on which to add the index. |
-| `key`     | The property key by which the label will be indexed. |
+| `label`   | A node label on which to add the index. Accepts a string. |
+| `key`     | A property key by which the label will be indexed. Accepts a string. |
 
 ## Details
 
@@ -32,7 +32,11 @@ An index already exists for any (label, key) pair that has a uniqueness constrai
 ## Examples
 
 ```r
-addIndex(graph, "Person", "name")
+createNode(graph, "Person", name = "Nicole", status = "Employed")
+createNode(graph, "Person", name = "Drew", status = "Employed")
+createNode(graph, "Person", name = "Aaron", status = "Unemployed")
+
+addIndex(graph, "Person", "status")
 ```
 
 ## See Also

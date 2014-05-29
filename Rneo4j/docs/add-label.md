@@ -21,21 +21,26 @@ addLabel(node, ...)
 
 | Parameter | Description |
 | --------- | ----------- |
-| `node`    | The node object to which to add the label(s). |
+| `node`    | A node object to which to add the label(s). |
 | `...`     | The label(s) to add to the node. Accepts a string or strings separated by commas. |
 
 ## Examples
 
+```r
+alice = createNode(graph, name = "Alice")
+bob = createNode(graph, name = "Bob")
+```
+
 Add a single label.
 
 ```r
-addLabel(bob, "Student")
+addLabel(alice, "Student")
 ```
 
 Add multiple labels.
 
 ```r
-addLabel(alice, "Person", "Student")
+addLabel(bob, "Person", "Student")
 ```
 
 ## See Also

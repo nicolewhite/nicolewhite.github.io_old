@@ -21,8 +21,8 @@ dropLabel(node, ...)
 
 | Parameter | Description     |
 | --------- | --------------- |
-| `node`    | The node object from which to drop the label(s). |
-| `...`   | The label(s) to drop from the node. Accepts a single string or strings separated by commas. | 
+| `node`    | A node object from which to drop the given label(s). |
+| `...`   | The label(s) to drop from the node. Accepts a single string or strings separated by commas. |
 
 ## Examples
 
