@@ -30,10 +30,17 @@ A node object.
 ## Examples
 
 ```r
-rel = createRel(alice, "KNOWS", bob)
-start = getStart(rel)
+alice = createNode(graph, "Person", name = "Alice")
+bob = createNode(graph, "Person", name = "Bob")
 
-identical(start, alice)
+rel = createRel(alice, "WORKS_WITH", bob)
+
+startNode(rel)
+
+# Labels: Person
+#
+# $name
+# [1] "Alice"tart, alice)
 # TRUE
 ```
 

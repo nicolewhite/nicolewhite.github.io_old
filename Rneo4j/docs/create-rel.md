@@ -29,20 +29,6 @@ createRel(fromNode, type, toNode, ...)
 
 A relationship object.
 
-## Details
-
-The string supplied for the `type` argument will be converted to uppercase and all spaces will be replaced with underscores. That is,
-
-```r
-createRel(alice, "works with", bob)
-```
-
-is equivalent to
-
-```r
-createRel(alice, "WORKS_WITH", bob)
-```
-
 ## Examples
 
 ```r
@@ -54,13 +40,13 @@ charles = createNode(graph, "Person", name = "Charles")
 Relationship without properties.
 
 ```r
-rel = createRel(alice, "works with", bob)
+createRel(alice, "WORKS_WITH", bob)
 ```
 
 Relationship with properties.
 
 ```r
-rel = createRel(alice, "works with", charles, since = 2000, through = "Work")
+createRel(bob, "KNOWS", charles, since = 2000, through = "Work")
 ```
 
 ## See Also
