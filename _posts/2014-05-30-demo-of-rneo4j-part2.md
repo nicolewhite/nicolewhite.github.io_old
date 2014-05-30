@@ -7,7 +7,7 @@ title: Demo of Rneo4j Part 2 - Plotting and Analysis
 
 [Part 1: Building a Database]({{ site.url }}/2014/05/30/demo-of-rneo4j-part1.html)
 
-In Part 1, I built a database using `Rneo4j` and `twitteR`. Now I can use `Rneo4j` to retreive data from the database for plotting and analysis using a few of `R`'s' many available packages.
+In Part 1, I built a database using `Rneo4j` and `twitteR`. Now I can use `Rneo4j` to retreive data from the database for plotting and analysis using a few of `R`'s many available packages.
 
 ## Hashtag Co-Occurrence with #Neo4j
 
