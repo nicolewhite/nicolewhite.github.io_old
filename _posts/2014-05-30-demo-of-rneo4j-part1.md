@@ -15,7 +15,7 @@ First and foremost, shoutouts to [Hilary Parker](https://twitter.com/hspter) for
 
 I want to build a graph database of Twitter data containing `Users`, `Tweets`, and `Hashtags`. It'll look like this:
 
-![structure](http://i.imgur.com/W8mzgVZ.png)
+<a href="http://i.imgur.com/W8mzgVZ.png" target="_blank"><img src="http://i.imgur.com/W8mzgVZ.png" width="100%" height="100%"></a>
 
 ## Get Started
 
@@ -185,8 +185,6 @@ summary(graph)
 
 And of course, going to the browser is always fun. Here's [Richard Searle](https://twitter.com/rc_searle) in the graph.
 
-![richard](http://i.imgur.com/4h98bp2.png)
-
-View [full resolution](http://i.imgur.com/4h98bp2.png).
+<a href="http://i.imgur.com/4h98bp2.png" target="_blank"><img src="http://i.imgur.com/4h98bp2.png" width="100%" height="100%"></a>
 
 With the database created, I can start using `Rneo4j` functions designed to retrieve data from the database. See [Part 2: Plotting and Analysis]({{ site.url }}/2014/05/30/demo-of-rneo4j-part2.html).

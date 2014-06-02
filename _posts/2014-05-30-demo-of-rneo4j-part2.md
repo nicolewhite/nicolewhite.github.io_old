@@ -54,9 +54,7 @@ ggplot(hashtag_count, aes(x = reorder(hashtag, count), y = count)) +
         plot.title = element_text(size = 16, color = "black"))
 ```
 
-![hashtags](http://i.imgur.com/kkjzKsn.png)
-
-View [full resolution](http://i.imgur.com/kkjzKsn.png).
+<a href="http://i.imgur.com/kkjzKsn.png" target="_blank"><img src="http://i.imgur.com/kkjzKsn.png" width="100%" height="100%"></a>
 
 ### Word Cloud
 
@@ -121,6 +119,4 @@ wordcloud(words = d$word,
           colors = pal)
 ```
 
-![wordcloud](http://i.imgur.com/OF1ZeRQ.png)
-
-View [full resolution](http://i.imgur.com/OF1ZeRQ.png).
+<a href="http://i.imgur.com/OF1ZeRQ.png" target="_blank"><img src="http://i.imgur.com/OF1ZeRQ.png" width="100%" height="100%"></a>
