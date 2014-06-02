@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Demo of Rneo4j Part 1 - Building a Database
+title: Demo of RNeo4j Part 1 - Building a Database
 ---
 
-# Demo of Rneo4j Part 1: Building a Database
+# Demo of RNeo4j Part 1: Building a Database
 
-I've recently been working on an `R` driver for Neo4j, [Rneo4j](https://github.com/nicolewhite/Rneo4j), and it's gotten to the point where the package mostly works aside from a few known bugs and probably several unknown bugs. To hopefully convince at least one person that this package is useful, I want to demonstrate how you can build and interact with a Neo4j database entirely from your `R` environment.
+I've recently been working on an `R` driver for Neo4j, [RNeo4j](https://github.com/nicolewhite/RNeo4j), and it's gotten to the point where the package mostly works aside from a few known bugs and probably several unknown bugs. To hopefully convince at least one person that this package is useful, I want to demonstrate how you can build and interact with a Neo4j database entirely from your `R` environment.
 
 ## Shoutouts
 
@@ -19,12 +19,12 @@ I want to build a graph database of Twitter data containing `Users`, `Tweets`, a
 
 ## Get Started
 
-Install `Rneo4j` using `devtools`.
+Install `RNeo4j` using `devtools`.
 
 ```r
 install.packages("devtools")
-devtools::install_github("nicolewhite/Rneo4j")
-library(Rneo4j)
+devtools::install_github("nicolewhite/RNeo4j")
+library(RNeo4j)
 ```
 
 Install `twitteR` and get authenticated.
@@ -107,7 +107,7 @@ getMentions = function(twit) {
 
 ## Build the Database
 
-Establish a connection (make sure Neo4j is running), clear the graph, and add the necessary uniqueness constraints with [`addConstraint`]({{ site.url }}/Rneo4j/docs/add-constraint.html).
+Establish a connection (make sure Neo4j is running), clear the graph, and add the necessary uniqueness constraints with [`addConstraint`]({{ site.url }}/RNeo4j/docs/add-constraint.html).
 
 ```r
 graph = startGraph("http://localhost:7474/db/data/")
@@ -120,9 +120,9 @@ addConstraint(graph, "Hashtag", "hashtag")
 
 Now, I need to write a function through which I will pass each `status` object in order to add the tweet to the graph. I can then use `lapply` to apply the function over `neo4j_tweets`.
 
-I only need to use `Rneo4j` functions [`getOrCreateNode`]({{ site.url }}/Rneo4j/docs/get-or-create-node.html) and [`createRel`]({{ site.url }}/Rneo4j/docs/create-rel.html) to build the database. I have to use [`getOrCreateNode`]({{ site.url }}/Rneo4j/docs/get-or-create-node.html) because `Users`, `Hashtags`, and `Tweets` will occur more than once and I don't want to create any duplicates. So, [`getOrCreateNode`]({{ site.url }}/Rneo4j/docs/get-or-create-node.html) either creates the node if it doesn't exist or retrieves it from the graph. The syntax is `getOrCreateNode(graph, label, ...)` where `...` are the node properties in the form `key = value`. It is necessary that uniqueness constraints exist to use this function.
+I only need to use `RNeo4j` functions [`getOrCreateNode`]({{ site.url }}/RNeo4j/docs/get-or-create-node.html) and [`createRel`]({{ site.url }}/RNeo4j/docs/create-rel.html) to build the database. I have to use [`getOrCreateNode`]({{ site.url }}/RNeo4j/docs/get-or-create-node.html) because `Users`, `Hashtags`, and `Tweets` will occur more than once and I don't want to create any duplicates. So, [`getOrCreateNode`]({{ site.url }}/RNeo4j/docs/get-or-create-node.html) either creates the node if it doesn't exist or retrieves it from the graph. The syntax is `getOrCreateNode(graph, label, ...)` where `...` are the node properties in the form `key = value`. It is necessary that uniqueness constraints exist to use this function.
 
-Then, [`createRel`]({{ site.url }}/Rneo4j/docs/create-rel.html) creates a relationship between two nodes with the syntax `createRel(fromNode, type, toNode, ...)`, where `...` are optional relationship properties in the form `key = value`.
+Then, [`createRel`]({{ site.url }}/RNeo4j/docs/create-rel.html) creates a relationship between two nodes with the syntax `createRel(fromNode, type, toNode, ...)`, where `...` are optional relationship properties in the form `key = value`.
 
 The following function takes a `status` object, `x`, as an input and adds it to the graph database.
 
@@ -187,4 +187,4 @@ And of course, going to the browser is always fun. Here's [Richard Searle](https
 
 <a href="http://i.imgur.com/4h98bp2.png" target="_blank"><img src="http://i.imgur.com/4h98bp2.png" width="100%" height="100%"></a>
 
-With the database created, I can start using `Rneo4j` functions designed to retrieve data from the database. See [Part 2: Plotting and Analysis]({{ site.url }}/2014/05/30/demo-of-rneo4j-part2.html).
+With the database created, I can start using `RNeo4j` functions designed to retrieve data from the database. See [Part 2: Plotting and Analysis]({{ site.url }}/2014/05/30/demo-of-rneo4j-part2.html).

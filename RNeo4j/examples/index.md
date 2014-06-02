@@ -6,10 +6,10 @@ Under Construction
 
 # Quick Example
 
-Load `Rneo4j` and establish a connection to the currently-running Neo4j server.
+Load `RNeo4j` and establish a connection to the currently-running Neo4j server.
 
 ```r
-library(Rneo4j)
+library(RNeo4j)
 
 graph = startGraph("http://localhost:7474/db/data/")
 

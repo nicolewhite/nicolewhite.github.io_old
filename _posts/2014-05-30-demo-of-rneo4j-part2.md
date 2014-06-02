@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Demo of Rneo4j Part 2 - Plotting and Analysis
+title: Demo of RNeo4j Part 2 - Plotting and Analysis
 ---
 
-# Demo of Rneo4j Part 2: Plotting and Analysis
+# Demo of RNeo4j Part 2: Plotting and Analysis
 
 [Part 1: Building a Database]({{ site.url }}/2014/05/30/demo-of-rneo4j-part1.html)
 
-In Part 1, I built a database using `Rneo4j` and `twitteR`. Now I can use `Rneo4j` to retreive data from the database for plotting and analysis using a few of `R`'s many available packages.
+In Part 1, I built a database using `RNeo4j` and `twitteR`. Now I can use `RNeo4j` to retreive data from the database for plotting and analysis using a few of `R`'s many available packages.
 
 ## Hashtag Co-Occurrence with #Neo4j
 
-My favorite function in `Rneo4j`, [`cypher`]({{ site.url }}/Rneo4j/docs/cypher.html), allows you to retrieve Cypher query results as an `R` data frame. The following query gets the 10 hashtags that co-occur with #neo4j most frequently and their counts into a data frame called `hashtag_count`.
+My favorite function in `RNeo4j`, [`cypher`]({{ site.url }}/RNeo4j/docs/cypher.html), allows you to retrieve Cypher query results as an `R` data frame. The following query gets the 10 hashtags that co-occur with #neo4j most frequently and their counts into a data frame called `hashtag_count`.
 
 ```r
 query = "MATCH (h:Hashtag)<-[:HASHTAG]-(:Tweet)-[:HASHTAG]->(:Hashtag {hashtag:{hashtag}}) 
@@ -72,7 +72,7 @@ library(tm)
 library(RColorBrewer)
 ```
 
-Next I need to get all of the `Tweet` nodes from the graph into a list of `node` objects. This can be done with `Rneo4j`'s [`getLabeledNodes`]({{ site.url }}/Rneo4j/docs/get-labeled-nodes.html) function, which gets all nodes with the specified label.
+Next I need to get all of the `Tweet` nodes from the graph into a list of `node` objects. This can be done with `RNeo4j`'s [`getLabeledNodes`]({{ site.url }}/RNeo4j/docs/get-labeled-nodes.html) function, which gets all nodes with the specified label.
 
 ```r
 tweet_nodes = getLabeledNodes(graph, "Tweet")
