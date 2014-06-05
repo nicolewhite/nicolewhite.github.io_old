@@ -189,4 +189,4 @@ And of course, going to the browser is always fun. Here's [Richard Searle](https
 
 <a href="http://i.imgur.com/4h98bp2.png" target="_blank"><img src="http://i.imgur.com/4h98bp2.png" width="100%" height="100%"></a>
 
-With the database created, I can start using `RNeo4j` functions designed to retrieve data from the database. See [Part 2: Plotting and Analysis]({{ site.url }}/2014/05/30/demo-of-rneo4j-part2.html).
+With the database created, I can start using `RNeo4j` functions designed to retrieve data from the database. See [Part 2: Plotting and Analysis]({{ site.url }}/r/2014/05/30/demo-of-rneo4j-part2.html).
