@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
+comments: true
 title: Scale only the continuous variables in an R data frame.
+category: R
 ---
 # Scale only the continuous variables in an R data frame.
 

@@ -1,6 +1,8 @@
 ---
-layout: default
-title: Demo of RNeo4j Part 2 - Plotting and Analysis
+layout: post
+comments: true
+title: Demo of RNeo4j Part 2 - Plotting and Analysis.
+category: R
 ---
 
 # Demo of RNeo4j Part 2: Plotting and Analysis
