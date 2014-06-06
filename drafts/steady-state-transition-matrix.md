@@ -24,7 +24,7 @@ rownames(p) = states
 
 p
 
-#       Happy Gloomy Sleepy
+#        Happy Gloomy Sleepy
 # Happy    0.4    0.4    0.2
 # Gloomy   0.0    0.5    0.5
 # Sleepy   0.1    0.3    0.6
