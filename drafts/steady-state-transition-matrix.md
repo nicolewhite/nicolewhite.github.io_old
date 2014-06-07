@@ -73,7 +73,7 @@ For Markov processes that are finite, [irreducible](http://en.wikipedia.org/wiki
 
 This equilibrium is called the steady-state distribution of the Markov process and is typically denoted by \\(\mu\\) or \\(\pi\\). I prefer \\(\mu\\). The steady-state distribution can be interpreted as the fraction of time the Markov process spends in state \\(i\\) in the long-run. In this example, after raising \\(P\\) to a high enough power, we can see that the steady-state distribution is
 
-$$ \mu_{i} = [0.0877, 0.3860, 0.5263] $$.
+$$ \mu_{i} = [0.0877, 0.3860, 0.5263]. $$
 
 Instead of raising \\(P\\) to sufficiently high powers, this steady-state distribution can be found more easily in a few ways, all of which come down to solving
 
