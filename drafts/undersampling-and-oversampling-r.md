@@ -1,6 +1,8 @@
 ---
 layout: default
 title: Undersampling and Oversampling in R
+comments: true
+category: R
 ---
 # Undersampling and Oversampling in R
 
