@@ -160,7 +160,7 @@ mu
 
 ## Solve with Null Spaces
 
-My favorite way to get the steady-state distribution is by finding the [basis](http://en.wikipedia.org/wiki/Basis_%28linear_algebra%29) of the [null space](http://en.wikipedia.org/wiki/Kernel_%28linear_algebra%29) of \\((P - I)^T\\), where \\(I\\) is the [identity matrix](http://en.wikipedia.org/wiki/Identity_matrix). Note that the null space of \\((P - I)^T\\) is equivalent to the [left null space](http://en.wikipedia.org/wiki/Kernel_(linear_algebra)#Left_null_space) of \\(P - I\\).
+My favorite way to get the steady-state distribution is by finding the [basis](http://en.wikipedia.org/wiki/Basis_%28linear_algebra%29) of the [null space](http://en.wikipedia.org/wiki/Kernel_%28linear_algebra%29) of \\((P - I)^T\\), where \\(I\\) is the [identity matrix](http://en.wikipedia.org/wiki/Identity_matrix). Note that the null space of \\((P - I)^T\\) is equivalent to the [left null space](http://en.wikipedia.org/wiki/Kernel_linear_algebra#Left_null_space) of \\(P - I\\).
 
 Rearranging \\(\mu P = \mu\\) yields
 
