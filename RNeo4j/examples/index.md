@@ -31,7 +31,7 @@ parlor = createNode(graph, "Bar", name = "The Parlor", location = "Hyde Park")
 createNode(graph, "Bar", name = "Cheer Up Charlie's", location = "Downtown")
 ```
 
-View node properties with `node$property`.
+Get node properties with `node$property`.
 
 ```r
 mugshots$location
@@ -100,7 +100,7 @@ createRel(nicole, "DRINKS_AT", parlor, on = "Saturdays")
 rel = createRel(nicole, "DRINKS_AT", charlies, on = "Everyday")
 ```
 
-View relationship properties with `relationship$property`.
+Get relationship properties with `relationship$property`.
 
 ```r
 rel$on
