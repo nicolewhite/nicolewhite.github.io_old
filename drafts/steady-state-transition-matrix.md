@@ -89,7 +89,7 @@ with the constraint that
 
 $$ \mu\_0 + \mu\_1 + \mu\_2 = 1. $$
 
-After some re-arranging, we can get this into the form \\(Ax = b\\) where we can solve for \\(x\\) with R's [qr.solve](http://stat.ethz.ch/R-manual/R-devel/library/base/html/qr.html).
+After some re-arranging, we can get this into the form \\(Ax = b\\) where we can solve for \\(x\\) with `R`'s [qr.solve](http://stat.ethz.ch/R-manual/R-devel/library/base/html/qr.html).
 
 $$ (0.4 \mu\_0 - \mu\_0) + 0.0 \mu\_1 + 0.1 \mu\_2 = 0 $$
 $$ 0.4 \mu\_0 + (0.5 \mu\_1 - \mu\_1) + 0.3 \mu\_2 = 0 $$
@@ -160,7 +160,7 @@ mu
 
 ## Solve with Null Spaces
 
-My favorite way to get the steady-state distribution is by finding the [basis](http://en.wikipedia.org/wiki/Basis_%28linear_algebra%29) of the [null space](http://en.wikipedia.org/wiki/Kernel_%28linear_algebra%29) of \\((P - I)^T\\), where \\(I\\) is the [identity matrix](http://en.wikipedia.org/wiki/Identity_matrix).
+My favorite way to get the steady-state distribution is by finding the [basis](http://en.wikipedia.org/wiki/Basis_%28linear_algebra%29) of the [null space](http://en.wikipedia.org/wiki/Kernel_%28linear_algebra%29) of \\((P - I)^T\\), where \\(I\\) is the [identity matrix](http://en.wikipedia.org/wiki/Identity_matrix). Note that the null space of \\((P - I)^T\\) is equivalent to the [left null space](http://en.wikipedia.org/wiki/Kernel_(linear_algebra)#Left_null_space) of \\(P - I\\).
 
 Rearranging \\(\mu P = \mu\\) yields
 
