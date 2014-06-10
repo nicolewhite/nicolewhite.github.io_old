@@ -2,8 +2,6 @@
 layout: rneo4j
 ---
 
-Under Construction
-
 # Quick Example
 
 Load `RNeo4j` and establish a connection to the currently-running Neo4j server.
@@ -135,4 +133,14 @@ cypher(graph, query)
 # 1 Nicole   Fridays           Mugshots   Downtown
 # 2 Nicole Saturdays         The Parlor  Hyde Park
 # 3 Nicole  Everyday Cheer Up Charlie's   Downtown
+```
+
+Get all `Bar` names into a character vector.
+
+```r
+bars = getLabeledNodes(graph, "Bar")
+bars.names = lapply(bars, function(b) b$name)
+
+bars.names
+[1] "Mugshots" "The Parlor" "Cheer Up Charlie's"
 ```
