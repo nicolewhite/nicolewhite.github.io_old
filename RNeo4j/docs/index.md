@@ -2,8 +2,6 @@
 layout: rneo4j
 ---
 
-Under Construction
-
 # Documentation
 
 | Function                                     | Category                                                           |
