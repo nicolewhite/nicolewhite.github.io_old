@@ -2,7 +2,7 @@ markdown: redcarpet
 redcarpet:
   extensions: ["tables"]
 url: http://nicolewhite.github.io
-source: /home/nicole/Documents/GitHub/nicolewhite.github.io
-destination: /home/nicole/Desktop/_site
+source: C:/Users/Nicole/Documents/GitHub/nicolewhite.github.io
+destination: C:/Users/Nicole/Desktop/_site
 name: Nicole White
 description: Graphs | Math | R | Python

@@ -1,10 +1,10 @@
 ---
 layout: post
 comments: true
-title: Scale only the continuous variables in an R data frame.
+title: Scale Only the Continuous Variables in an R Data Frame.
 category: R
 ---
-# Scale only the continuous variables in an R data frame.
+# Scale Only the Continuous Variables in an R Data Frame
 
 When performing a logistic regression, it is often that your dataset consists of a mixture of continuous and binary variables. In order to avoid numerically-unstable estimation, it is desirable to scale the continous variables in your dataset while leaving the binary variables alone. Consider the following data frame:
 
