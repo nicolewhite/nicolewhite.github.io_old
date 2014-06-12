@@ -27,7 +27,7 @@ A node object.
 
 ## Details
 
-A uniqueness constraint must exist for the given node label and first key = value pair listed in `...`. Use [`addConstraint`](add-constraint.html) to add a uniqueness constraint.
+A uniqueness constraint must exist for the given node label and first key = value pair listed in `...`. Use [addConstraint](add-constraint.html) to add a uniqueness constraint.
 
 ## Examples
 

@@ -59,4 +59,4 @@ getLabel(graph)
 
 ## See Also
 
-[`addLabel`](add-label.html), [`dropLabel`](drop-label.html)
+[addLabel](add-label.html), [dropLabel](drop-label.html)

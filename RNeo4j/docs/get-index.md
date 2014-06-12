@@ -67,4 +67,4 @@ getIndex(graph)
 
 ## See Also
 
-[`addIndex`](add-index.html), [`dropIndex`](drop-index.html)
+[addIndex](add-index.html), [dropIndex](drop-index.html)

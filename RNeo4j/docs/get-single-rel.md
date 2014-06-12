@@ -92,4 +92,4 @@ endNode(rel)
 
 ## See Also
 
-[`getRels`](get-rels.html)
+[getRels](get-rels.html)

@@ -84,5 +84,5 @@ sapply(starts, function(s) s$name)
 
 ## See Also
 
-[`outgoingRels`](outgoing-rels.html)
+[outgoingRels](outgoing-rels.html)
 

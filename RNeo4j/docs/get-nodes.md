@@ -67,4 +67,4 @@ sapply(older_than_22, function(p) p$name)
 
 ## See Also
 
-[`getSingleNode`](get-single-node.html)
+[getSingleNode](get-single-node.html)

@@ -28,7 +28,7 @@ dropConstraint(graph, label = character(), key = character(), all = FALSE)
 
 ## Details
 
-Dropping a uniqueness constraint necessarily drops the index as well. It is unnecessary to use [`dropIndex`](drop-index.html) if `dropConstraint` has already been applied to the same `(label, key)` pair.
+Dropping a uniqueness constraint necessarily drops the index as well. It is unnecessary to use [dropIndex](drop-index.html) if `dropConstraint` has already been applied to the same `(label, key)` pair.
 
 ## Examples
 
@@ -72,4 +72,4 @@ getConstraint(graph)
 
 ## See Also
 
-[`addConstraint`](add-constraint.html), [`getConstraint`](get-constraint.html)
+[addConstraint](add-constraint.html), [getConstraint](get-constraint.html)

@@ -66,4 +66,4 @@ getConstraint(graph)
 
 ## See Also
 
-[`addConstraint`](add-constraint.html), [`dropConstraint`](drop-constraint.html)
+[addConstraint](add-constraint.html), [dropConstraint](drop-constraint.html)

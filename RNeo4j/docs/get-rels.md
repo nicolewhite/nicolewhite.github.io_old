@@ -73,4 +73,4 @@ sapply(alice_outgoing, getType)
 
 ## See Also
 
-[`getSingleRel`](get-single-rel.html)
+[getSingleRel](get-single-rel.html)

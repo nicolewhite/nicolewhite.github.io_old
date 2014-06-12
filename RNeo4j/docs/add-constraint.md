@@ -27,7 +27,7 @@ addConstraint(graph, label, key)
 
 ## Details
 
-A uniqueness constraint cannot be added to a (label, key) pair that already has an index applied. Attempting to add a uniqueness constraint where an index already exists results in an error. Use [`getIndex`](get-index.html) to view any pre-existing indexes. If you wish to add a uniqueness constraint, use [`dropIndex`](drop-index.html) to drop the index.
+A uniqueness constraint cannot be added to a (label, key) pair that already has an index applied. Attempting to add a uniqueness constraint where an index already exists results in an error. Use [getIndex](get-index.html) to view any pre-existing indexes. If you wish to add a uniqueness constraint, use [dropIndex](drop-index.html) to drop the index.
 
 Adding a uniqueness constraint will necessarily create an index.
 
@@ -44,4 +44,4 @@ addConstraint(graph, "Person", "name")
 
 ## See Also
 
-[`getConstraint`](get-constraint.html), [`dropConstraint`](drop-constraint.html)
+[getConstraint](get-constraint.html), [dropConstraint](drop-constraint.html)

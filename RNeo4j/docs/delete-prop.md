@@ -78,6 +78,6 @@ charles
 
 ## See Also
 
-[`updateProp`](update-prop.html)
+[updateProp](update-prop.html)
 
 

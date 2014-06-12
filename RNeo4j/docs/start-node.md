@@ -46,4 +46,4 @@ startNode(rel)
 
 ## See Also
 
-[`endNode`](end-node.html)
+[endNode](end-node.html)

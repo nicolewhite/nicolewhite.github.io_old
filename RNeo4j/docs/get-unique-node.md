@@ -31,7 +31,7 @@ A node object. Returns NULL if a node is not found.
 
 ## Details
 
-A uniqueness constraint must exist on the (label, key) pair in order to use this function. Specify a uniqueness constraint first with [`addConstraint`](add-constraint.html).
+A uniqueness constraint must exist on the (label, key) pair in order to use this function. Specify a uniqueness constraint first with [addConstraint](add-constraint.html).
 
 ## Examples
 
@@ -53,4 +53,4 @@ alice
 
 ## See Also
 
-[`getLabeledNodes`](get-labeled-nodes.html)
+[getLabeledNodes](get-labeled-nodes.html)

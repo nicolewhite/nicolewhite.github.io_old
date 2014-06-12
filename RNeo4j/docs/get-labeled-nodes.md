@@ -55,4 +55,4 @@ sapply(employed_people, function(p) p$name)
 
 ## See Also
 
-[`getUniqueNode`](get-unique-node.html)
+[getUniqueNode](get-unique-node.html)

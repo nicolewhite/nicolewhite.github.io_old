@@ -38,4 +38,4 @@ alice = updateProp(alice, age = 24, eyes = "green")
 
 ## See Also
 
-[`deleteProp`](delete-prop.html)
+[deleteProp](delete-prop.html)

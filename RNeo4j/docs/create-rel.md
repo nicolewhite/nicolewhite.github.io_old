@@ -48,6 +48,3 @@ Relationship with properties.
 ```r
 createRel(bob, "KNOWS", charles, since = 2000, through = "Work")
 ```
-
-## See Also
-[`startNode`](start-node.html), [`endNode`](end-node.html)

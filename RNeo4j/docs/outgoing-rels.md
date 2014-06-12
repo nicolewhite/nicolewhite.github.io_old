@@ -80,6 +80,6 @@ sapply(ends, function(e) e$name)
 
 ## See Also
 
-[`incomingRels`](incoming-rels.html)
+[incomingRels](incoming-rels.html)
 
 

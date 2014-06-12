@@ -40,4 +40,4 @@ dropLabel(bob, "Person", "Student")
 
 ## See Also
 
-[`addLabel`](add-label.html), [`getLabel`](get-label.html)
+[addLabel](add-label.html), [getLabel](get-label.html)

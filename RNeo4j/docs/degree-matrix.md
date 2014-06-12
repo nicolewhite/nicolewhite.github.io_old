@@ -108,3 +108,7 @@ deg = degreeMatrix(graph,
 # Elaine     0   0       0     0      3       0
 # Forrest    0   0       0     0      0       1 
 ```
+
+## See Also
+
+[adjacencyMatrix](adjacency-matrix.html)
