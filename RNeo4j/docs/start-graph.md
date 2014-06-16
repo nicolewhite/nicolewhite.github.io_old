@@ -27,10 +27,10 @@ A graph object.
 
 ## Details
 
-To get started, you will need the URL of the graph database. If running Neo4j locally, it is [http://localhost:7474/db/data](http://localhost:7474/db/data).
+To get started, you will need the URL of the graph database. If running Neo4j locally, it is `http://localhost:7474/db/data/`.
 
 ## Examples
 
 ```r
-graph = startGraph("http://localhost:7474/db/data")
+graph = startGraph("http://localhost:7474/db/data/")
 ```

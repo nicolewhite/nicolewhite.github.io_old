@@ -35,5 +35,5 @@ layout: rneo4j
 | [cypher](cypher.html)                        | Cypher Queries                                                     |
 | [adjacencyMatrix](adjacency-matrix.html)     | Adjacency Matrices                                                 |
 | [degreeMatrix](degree-matrix.html)           | Degree Matrices                                                    |
-| [populate](populate.html)                    | Populate the Database                                              |
+| [importSample](import-sample.html)           | Import Sample Datasets                                             |
 | [clear](clear.html)                          | Clear the Database                                                 |

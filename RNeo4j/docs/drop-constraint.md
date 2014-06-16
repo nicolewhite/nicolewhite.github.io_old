@@ -34,7 +34,7 @@ Dropping a uniqueness constraint necessarily drops the index as well. It is unne
 
 ```r
 createNode(graph, "Person", name = "Alice")
-reateNode(graph, "Person", name = "Bob")
+createNode(graph, "Person", name = "Bob")
 
 createNode(graph, "City", name = "San Francisco")
 createNode(graph, "City", name = "Austin")

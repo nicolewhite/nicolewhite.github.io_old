@@ -14,7 +14,7 @@ Retreive a list of incoming relationship objects from a node object, optionally 
 ## Usage
 
 ```r
-incomingRels(node, ..., limit = numeric())
+incomingRels(node, ...)
 ```
 
 ## Arguments
@@ -23,7 +23,6 @@ incomingRels(node, ..., limit = numeric())
 | --------- | --------------- |
 | `node`    | A node object.  |
 | `...`     | Optional relationship type(s) by which to filter the results. Accepts a string or strings separated by commas. |
-| `limit`   | An optional numeric value to limit how many relationships are returned. |
 
 ## Output
 

@@ -33,7 +33,7 @@ Nodes with incoming or outgoing relationships cannot be deleted. All incoming an
 alice = createNode(graph, name = "Alice")
 bob = createNode(graph, name = "Bob")
 
-rel = createRel(alice, "works with", bob)
+rel = createRel(alice, "WORKS_WITH", bob)
 
 delete(rel)
 delete(alice, bob)
