@@ -43,10 +43,10 @@ Create a node with properties.
 alice = createNode(graph, name = "Alice", age = 23)
 ```
 
-Create a node with a label and properties.
+Create a node with a label and properties. Arrays can be added as properties.
 
 ```r
-bob = createNode(graph, "Person", name = "Bob", age = 24)
+bob = createNode(graph, "Person", name = "Bob", age = 24, kids = c("Jenny", "Larry"))
 ```
 
 Create a node with multiple labels and properties.
