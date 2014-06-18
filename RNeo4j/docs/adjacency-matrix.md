@@ -40,7 +40,7 @@ A square adjacency matrix. If a direction is not supplied, the matrix will be sy
 ```r
 addConstraint(graph, "Person", "name")
 
-alice = createNode(graph, "Person", name = "Alex")
+alice = createNode(graph, "Person", name = "Alice")
 bob = createNode(graph, "Person", name = "Bob")
 charles = createNode(graph, "Person", name = "Charles")
 debby = createNode(graph, "Person", name = "Debby")
@@ -68,8 +68,8 @@ out_adj = adjacencyMatrix(graph,
                           
 out_adj
 
-#         Alex Bob Charles Debby Elaine Forrest
-# Alex       0   1       0     0      1       0
+#        Alice Bob Charles Debby Elaine Forrest
+# Alice      0   1       0     0      1       0
 # Bob        0   0       1     0      1       0
 # Charles    0   0       0     1      0       0
 # Debby      1   0       0     0      0       1
@@ -88,8 +88,8 @@ in_adj = adjacencyMatrix(graph,
                          
 in_adj
 
-#         Alex Bob Charles Debby Elaine Forrest
-# Alex       0   0       0     1      0       0
+#        Alice Bob Charles Debby Elaine Forrest
+# Alice      0   0       0     1      0       0
 # Bob        1   0       0     0      0       0
 # Charles    0   1       0     0      0       0
 # Debby      0   0       1     0      1       0
@@ -119,8 +119,8 @@ adj = adjacencyMatrix(graph,
                       
 adj
 
-#         Alex Bob Charles Debby Elaine Forrest
-# Alex       0   1       0     1      1       0
+#        Alice Bob Charles Debby Elaine Forrest
+# Alice      0   1       0     1      1       0
 # Bob        1   0       1     0      1       0
 # Charles    0   1       0     1      0       0
 # Debby      1   0       1     0      1       1

@@ -39,7 +39,7 @@ A square, diagonal degree matrix.
 ```r
 addConstraint(graph, "Person", "name")
 
-alice = createNode(graph, "Person", name = "Alex")
+alice = createNode(graph, "Person", name = "Alice")
 bob = createNode(graph, "Person", name = "Bob")
 charles = createNode(graph, "Person", name = "Charles")
 debby = createNode(graph, "Person", name = "Debby")
@@ -65,8 +65,8 @@ in_deg = degreeMatrix(graph,
                       type = "KNOWS",
                       direction = "incoming")
                       
-#         Alex Bob Charles Debby Elaine Forrest
-# Alex       1   0       0     0      0       0
+#        Alice Bob Charles Debby Elaine Forrest
+# Alice      1   0       0     0      0       0
 # Bob        0   1       0     0      0       0
 # Charles    0   0       1     0      0       0
 # Debby      0   0       0     2      0       0
@@ -83,8 +83,8 @@ out_deg = degreeMatrix(graph,
                        type = "KNOWS",
                        direction = "outgoing")
                        
-#         Alex Bob Charles Debby Elaine Forrest
-# Alex       2   0       0     0      0       0
+#        Alice Bob Charles Debby Elaine Forrest
+# Alice      2   0       0     0      0       0
 # Bob        0   2       0     0      0       0
 # Charles    0   0       1     0      0       0
 # Debby      0   0       0     2      0       0
@@ -100,8 +100,8 @@ deg = degreeMatrix(graph,
                    key = "name",
                    type = "KNOWS")
                    
-#         Alex Bob Charles Debby Elaine Forrest
-# Alex       3   0       0     0      0       0
+#        Alice Bob Charles Debby Elaine Forrest
+# Alice      3   0       0     0      0       0
 # Bob        0   3       0     0      0       0
 # Charles    0   0       2     0      0       0
 # Debby      0   0       0     4      0       0
