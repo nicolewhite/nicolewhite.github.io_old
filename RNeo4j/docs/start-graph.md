@@ -37,7 +37,7 @@ A local db.
 graph = startGraph("http://localhost:7474/db/data/")
 ```
 
-A remote graphene db.
+A remote [Graphene](http://www.graphenedb.com/) db.
 
 ```r
 graph = startGraph(url = "http://test.sb02.stations.graphenedb.com:24789/db/data/", 
