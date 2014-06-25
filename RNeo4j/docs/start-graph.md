@@ -13,24 +13,34 @@ Establish a connection to the graph database.
 
 ## Usage
 
-`startGraph(url)`
+```r
+startGraph(url, username = character(), password = character())
+```
 
 ## Arguments
 
 | Parameter | Description |
 | --------- | ----------- |
 | `url`     | The URL of the graph database. Accepts a string.  |
+| `username` | If the database is remote, your username. Accepts a string. |
+| `password` | If the database is remote, your password. Accepts a string. |
 
 ## Output
 
 A graph object.
 
-## Details
-
-To get started, you will need the URL of the graph database. If running Neo4j locally, it is `http://localhost:7474/db/data/`.
-
 ## Examples
+
+A local db.
 
 ```r
 graph = startGraph("http://localhost:7474/db/data/")
+```
+
+A remote graphene db.
+
+```r
+graph = startGraph(url = "http://test.sb02.stations.graphenedb.com:24789/db/data/", 
+				   username = "test", 
+				   password = "ftDPkChL641gBe5s9xBO")
 ```
