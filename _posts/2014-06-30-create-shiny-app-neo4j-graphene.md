@@ -79,7 +79,7 @@ shinyUI(fluidPage(
                                  "C" = "C",
                                  "D" = "D",
                                  "E" = "E"),
-                                 selected = "A"),
+                  selected = "A"),
       "Powered by", a("Neo4j", 
                       href = "http://www.neo4j.org/",
                       target = "_blank"), 
@@ -130,6 +130,8 @@ shinyServer(function(input, output) {
 ```
 
 The URL, username, and password for the database are under the Connection tab in your GrapheneDB dashboard. In `server.R`, each input is referenced by whatever you named it in `ui.R`. In `ui.R`, each output is referenced by whatever you named it in `server.R`. Again, the Shiny tutorials and articles explain all of this very well. Both [startGraph](http://nicolewhite.github.io/RNeo4j/docs/start-graph.html) and [cypher](http://nicolewhite.github.io/RNeo4j/docs/cypher.html) are functions in my RNeo4j package.
+
+Each time the user changes one of the inputs, the code inside `renderTable()` is re-run to update the output with the user's new inputs.
 
 My `if-else` logic in `server.R` is handling the different data types that can be returned by `input$categories`:
 
