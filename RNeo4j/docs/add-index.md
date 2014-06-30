@@ -3,8 +3,6 @@ title: addIndex
 layout: rneo4j
 ---
 
-`addIndex`
-
 # Indexes
 
 ## Description

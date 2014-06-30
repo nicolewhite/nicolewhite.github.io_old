@@ -3,8 +3,6 @@ title: createRel
 layout: rneo4j
 ---
 
-`createRel`
-
 # Create Relationships
 
 ## Description
@@ -25,7 +23,7 @@ createRel(fromNode, type, toNode, ...)
 | `toNode` | A node object to which the relationship will be incoming. |
 | `...` | Optional relationship properties in the form key = value (separated by commas). |
 
-## Output
+## Value
 
 A relationship object.
 

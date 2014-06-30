@@ -3,8 +3,6 @@ title: getSingleRel
 layout: rneo4j
 ---
 
-`getSingleRel`
-
 # Retrieve Relationships from the Graph Database with Cypher Queries
 
 ## Description
@@ -25,7 +23,7 @@ getSingleRel(graph, query, ...)
 | `query`   | A Cypher query in the form of a string. |
 | `...`     | Optional parameters to pass to the query in the form key = value, if applicable. |
 
-## Output
+## Value
 
 A relationship object. Returns NULL if a relationship is not found.
 

@@ -3,8 +3,6 @@ title: getLabeledNodes
 layout: rneo4j
 ---
 
-`getLabeledNodes`
-
 # Retrieve Nodes from the Graph Database by Label and Property
 
 ## Description
@@ -25,7 +23,7 @@ getLabeledNodes(graph, label, ...)
 | `label`   | A node label. Accepts a string. |
 | `...`     | An optional key = value pair by which to filter the results. Only accepts one key = value pair. |
 
-## Output
+## Value
 
 A list of node objects. Returns NULL if no nodes are found.
 

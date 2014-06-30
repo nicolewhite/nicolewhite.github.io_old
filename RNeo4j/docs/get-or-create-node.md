@@ -3,8 +3,6 @@ title: getOrCreateNode
 layout: rneo4j
 ---
 
-`getOrCreateNode`
-
 # Create Unique Node or Retrieve Unique Node from the Graph Database
 
 ## Usage
@@ -21,7 +19,7 @@ getOrCreateNode(graph, label, ...)
 | `label`   | A node label. Accepts a string. |
 | `...`     | Node properties in the form key = value, separated by commas. The first key = value pair listed must be the uniquely constrained key = value pair for the given node label. |
 
-## Output
+## Value
 
 A node object.
 

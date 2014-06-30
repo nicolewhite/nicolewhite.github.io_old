@@ -3,8 +3,6 @@ title: getConstraint
 layout: rneo4j
 ---
 
-`getConstraint`
-
 # Uniqueness Constraints
 
 ## Description
@@ -24,7 +22,7 @@ getConstraint(graph, label = character())
 | `graph`   | A graph object. |
 | `label`   | A node label for which to view all uniqueness constraints. Accepts a string. |
 
-## Output
+## Value
 
 A data frame. Returns NULL if no constraints are found.
 

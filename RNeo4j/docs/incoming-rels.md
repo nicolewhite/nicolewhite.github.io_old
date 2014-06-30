@@ -3,8 +3,6 @@ title: incomingRels
 layout: rneo4j
 ---
 
-`incomingRels`
-
 # Retrieve Relationships from Nodes
 
 ## Description
@@ -24,7 +22,7 @@ incomingRels(node, ...)
 | `node`    | A node object.  |
 | `...`     | Optional relationship type(s) by which to filter the results. Accepts a string or strings separated by commas. |
 
-## Output
+## Value
 
 A list of relationship objects.
 

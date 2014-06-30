@@ -3,8 +3,6 @@ title: addLabel
 layout: rneo4j
 ---
 
-`addLabel`
-
 # Node Labels
 
 ## Description

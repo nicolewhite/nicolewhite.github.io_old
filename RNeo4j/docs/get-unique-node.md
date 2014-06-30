@@ -3,8 +3,6 @@ title: getUniqueNode
 layout: rneo4j
 ---
 
-`getUniqueNode`
-
 # Retrieve Nodes from the Graph Database by Label and Property
 
 ## Description
@@ -25,7 +23,7 @@ getUniqueNode(graph, label, ...)
 | `label`   | A node label. Accepts a string. |
 | `...`     | A key = value pair by which the node label is uniquely constrained. Only accepts one key = value pair. |
 
-## Output
+## Value
 
 A node object. Returns NULL if a node is not found.
 

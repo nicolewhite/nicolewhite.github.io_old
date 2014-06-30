@@ -3,8 +3,6 @@ title: getRels
 layout: rneo4j
 ---
 
-`getRels`
-
 # Retrieve Relationships from the Graph Database with Cypher Queries
 
 ## Description
@@ -25,7 +23,7 @@ getRels(graph, query, ...)
 | `query`   | A Cypher query in the form of a string. |
 | `...`     | Optional parameters to pass to the query in the form key = value, if applicable. |
 
-## Output
+## Value
 
 A list of relationship objects. Returns NULL if no relationships are found.
 

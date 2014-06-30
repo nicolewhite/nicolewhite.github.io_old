@@ -3,8 +3,6 @@ title: getNodes
 layout: rneo4j
 ---
 
-`getNodes`
-
 # Retrieve Nodes from the Graph Database with Cypher Queries
 
 ## Description
@@ -25,7 +23,7 @@ getNodes(graph, query, ...)
 | `query`   | A Cypher query in the form of a string. |
 | `...`     | Optional parameters to pass to the query in the form key = value, if applicable. |
 
-## Output
+## Value
 
 A list of node objects. Returns NULL if no nodes are found.
 

@@ -3,8 +3,6 @@ title: dropConstraint
 layout: rneo4j
 ---
 
-`dropConstraint`
-
 # Uniqueness Constraints
 
 ## Description

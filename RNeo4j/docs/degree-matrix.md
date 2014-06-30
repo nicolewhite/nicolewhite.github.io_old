@@ -31,7 +31,7 @@ If a direction is not supplied, the `(i, j)` entry of the degree matrix captures
 
 Degrees are returned as a matrix so that one can easily calculate a [Laplacian matrix](http://en.wikipedia.org/wiki/Laplacian_matrix), \\(L\\), which can be found by \\(L = D - A\\), where \\(D\\) is a degree matrix and \\(A\\) is an adjacency matrix.
 
-## Output
+## Value
 A square, diagonal degree matrix.
 
 ## Examples

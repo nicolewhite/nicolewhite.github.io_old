@@ -3,8 +3,6 @@ title: addConstraint
 layout: rneo4j
 ---
 
-`addConstraint`
-
 # Uniqueness Constraints
 
 ## Description

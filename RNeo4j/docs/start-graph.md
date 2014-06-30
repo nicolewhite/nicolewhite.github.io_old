@@ -3,8 +3,6 @@ title: startGraph
 layout: rneo4j
 ---
 
-`startGraph`
-
 # Connect to the Graph Database
 
 ## Description
@@ -25,7 +23,7 @@ startGraph(url, username = character(), password = character())
 | `username` | If the database is remote, your username. Accepts a string. |
 | `password` | If the database is remote, your password. Accepts a string. |
 
-## Output
+## Value
 
 A graph object.
 

@@ -3,8 +3,6 @@ title: delete
 layout: rneo4j
 ---
 
-`delete`
-
 # Delete Nodes and Relationships
 
 ## Description

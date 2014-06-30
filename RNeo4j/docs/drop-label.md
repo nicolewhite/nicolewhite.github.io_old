@@ -3,8 +3,6 @@ title: dropLabel
 layout: rneo4j
 ---
 
-`dropLabel`
-
 # Node Labels
 
 ## Description

@@ -3,8 +3,6 @@ title: populate
 layout: rneo4j
 ---
 
-`populate`
-
 # Populate the Graph Database
 
 ## Description

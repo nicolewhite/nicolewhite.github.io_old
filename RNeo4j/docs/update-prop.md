@@ -3,8 +3,6 @@ title: updateProp
 layout: rneo4j
 ---
 
-`updateProp`
-
 # Update Node and Relationship Properties
 
 ## Description
@@ -24,7 +22,7 @@ updateProp(object, ...)
 | `object`  | A node or relationship object. |
 | `...`     | Property updates or additions in the form key = value (separated by commas). |
 
-## Output
+## Value
 
 A node or relationship object.
 

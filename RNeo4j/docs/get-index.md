@@ -3,8 +3,6 @@ title: getIndex
 layout: rneo4j
 ---
 
-`getIndex`
-
 # Indexes
 
 ## Description
@@ -24,7 +22,7 @@ getIndex(graph, label = character())
 | `graph`   | A graph object. |
 | `label`   | A node label for which to view all indexes. Accepts a string. |
 
-## Output
+## Value
 
 A data frame. Returns NULL if no indexes are found.
 

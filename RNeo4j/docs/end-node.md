@@ -3,8 +3,6 @@ title: endNode
 layout: rneo4j
 ---
 
-`endNode`
-
 # Retrieve Nodes from Relationships
 
 ## Description
@@ -23,7 +21,7 @@ endNode(rel)
 | --------- | --------------- |
 | `rel`     | A relationship object. |
 
-## Output
+## Value
 
 A node object.
 

@@ -3,8 +3,6 @@ title: startNode
 layout: rneo4j
 ---
 
-`startNode`
-
 # Retrieve Nodes from Relationships
 
 ## Description
@@ -23,7 +21,7 @@ startNode(rel)
 | --------- | --------------- |
 | `rel`     | A relationship object. |
 
-## Output
+## Value
 
 A node object.
 

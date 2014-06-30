@@ -3,8 +3,6 @@ title: getType
 layout: rneo4j
 ---
 
-`getType`
-
 # Relationship Types
 
 ## Description
@@ -23,9 +21,9 @@ getType(object)
 | --------- | --------------- |
 | `object`  | The object for which to view the relationship type(s). Accepts a relationship or graph object (see details). |
 
-## Output
+## Value
 
-A string or character vector.
+A character vector.
 
 ## Details
 

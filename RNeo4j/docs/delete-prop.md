@@ -3,8 +3,6 @@ title: deleteProp
 layout: rneo4j
 ---
 
-`deleteProp`
-
 # Delete Node and Relationship Properties
 
 ## Description
@@ -25,7 +23,7 @@ deleteProp(object, ..., all = FALSE)
 | `...`     | The properties to be deleted. Accepts a single string or strings separated by commas. |
 | `all`     | Set to TRUE to delete all properties on the node or relationship object. |
 
-## Output
+## Value
 
 A node or relationship object.
 

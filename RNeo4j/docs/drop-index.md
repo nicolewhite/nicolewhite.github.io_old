@@ -3,8 +3,6 @@ title: dropIndex
 layout: rneo4j
 ---
 
-`dropIndex`
-
 # Indexes
 
 ## Description

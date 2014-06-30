@@ -3,8 +3,6 @@ title: createNode
 layout: rneo4j
 ---
 
-`createNode`
-
 # Create Nodes
 
 ## Description
@@ -25,7 +23,7 @@ createNode(graph, label = character(), ...)
 | `label`   | Optional node label(s). Accepts a string or vector of strings. |
 | `...`     | Optional node properties in the form key = value (separated by commas). |
 
-## Output
+## Value
 
 A node object.
 

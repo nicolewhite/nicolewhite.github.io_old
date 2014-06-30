@@ -3,8 +3,6 @@ title: getSingleNode
 layout: rneo4j
 ---
 
-`getSingleNode`
-
 # Retrieve Nodes from the Graph Database with Cypher Queries
 
 ## Description
@@ -24,6 +22,10 @@ getSingleNode(graph, query, ...)
 | `graph`   | A graph object. |
 | `query`   | A Cypher query in the form of a string. |
 | `...`     | Optional parameters to pass to the query in the form key = value, if applicable. |
+
+## Value
+
+A node object. Returns NULL if a node is not found.
 
 ## Details
 

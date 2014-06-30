@@ -3,8 +3,6 @@ title: clear
 layout: rneo4j
 ---
 
-`clear`
-
 # Clear the Database
 
 ## Description

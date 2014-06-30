@@ -3,8 +3,6 @@ title: cypher
 layout: rneo4j
 ---
 
-`cypher`
-
 # Cypher Queries
 
 ## Description
@@ -31,9 +29,9 @@ If returning data, you can only query for tabular results. That is, this method 
 
 You can send Cypher queries without any return values (i.e., a Cypher query without the word `RETURN` in it).
 
-## Output
+## Value
 
-A data frame. Cypher queries returning no results will return NULL and a message that the query was executed.
+A data frame. Cypher queries returning no results will return NULL.
 
 ## Examples
 

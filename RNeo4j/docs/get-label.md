@@ -3,8 +3,6 @@ title: getLabel
 layout: rneo4j
 ---
 
-`getLabel`
-
 # Node Labels
 
 ## Description
@@ -23,7 +21,7 @@ getLabel(object)
 | --------- | --------------- |
 | `object`  | An object for which to view all node labels. Accepts a node or graph object (see details). |
 
-## Output
+## Value
 
 A character vector.
 
