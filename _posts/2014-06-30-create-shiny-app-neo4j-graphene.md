@@ -63,13 +63,14 @@ shinyUI(fluidPage(
                                         "Grand Hyatt Dining" = "Grand Hyatt Dining", 
                                         "Italian/Pizza" = "Italian/Pizza",
                                         "Mexican/Southwest" = "Mexican/Southwest",
+                                        "Power Charging" = "Power Charging",
                                         "Sandwich/Deli" = "Sandwich/Deli",
                                         "Seafood" = "Seafood"),
-                         selected = "Coffee"),
+                         selected = c("Coffee", "Power Charging")),
       strong("closest to gate"),
       numericInput("gate", 
                    label = "", 
-                   value = 1),
+                   value = 10),
       br(),
       strong("in terminal"),
       selectInput("terminal", 
@@ -79,7 +80,7 @@ shinyUI(fluidPage(
                                  "C" = "C",
                                  "D" = "D",
                                  "E" = "E"),
-                  selected = "A"),
+                                 selected = "A"),
       "Powered by", a("Neo4j", 
                       href = "http://www.neo4j.org/",
                       target = "_blank"), 
@@ -105,9 +106,9 @@ graph = startGraph("http://dfw.sb02.stations.graphenedb.com:24789/db/data/",
 
 query1 = "MATCH (c:Category)<-[:IN_CATEGORY]-(p:Place)-[:AT_GATE]->(g:Gate)-[:IN_TERMINAL]->(t:Terminal {name:{terminal}})"
           
-query2 = "WITH p, g, t, g.gate - {gate} AS dist
+query2 = "WITH c, p, g, t, g.gate - {gate} AS dist
           ORDER BY ABS(dist)
-          RETURN DISTINCT p.name AS Name, g.gate AS Gate, t.name AS Terminal"
+          RETURN p.name AS Name, c.name AS Category, g.gate AS Gate, t.name AS Terminal"
 
 shinyServer(function(input, output) {
   output$restaurants <- renderTable({
@@ -123,7 +124,12 @@ shinyServer(function(input, output) {
                   categories = input$categories,
                   terminal = input$terminal,
                   gate = input$gate)
-    return(data)
+    if(is.null(data)){
+      return(data)
+    } else{
+      data$Gate = as.integer(data$Gate)
+      return(data)
+    }
   })
 }
 )
