@@ -124,12 +124,7 @@ shinyServer(function(input, output) {
                   categories = input$categories,
                   terminal = input$terminal,
                   gate = input$gate)
-    if(is.null(data)){
-      return(data)
-    } else{
-      data$Gate = as.integer(data$Gate)
-      return(data)
-    }
+    return(data)
   })
 }
 )
