@@ -2,13 +2,14 @@
 title: A Cluster Analysis of London NoSQL Meetup Groups.
 layout: post
 comments: true
+categories: R
 ---
 
 # A Cluster Analysis of London NoSQL Meetup Groups
 
 Using [Mark Needham](http://www.markhneedham.com)'s London NoSQL Meetup groups dataset, I wanted to perform a cluster analysis of the meetup groups based on their shared topics.
 
-After starting the database locally, I explored its structure within my `R` environment. I can view the node labels and how they are connected by executing `summary` on the `graph` object, and I can view any uniqueness constraints with [`getConstraint`]({{ site.url }}/RNeo4j/docs/get-constraints.html):
+After starting the database locally, I explored its structure within my `R` environment. I can view the node labels and how they are connected by executing `summary` on the `graph` object, and I can view any uniqueness constraints with [getConstraint]({{ site.url }}/RNeo4j/docs/get-constraints.html):
 
 ```r
 library(RNeo4j)
@@ -46,7 +47,7 @@ getConstraint(graph)
 
 To attempt a cluster analysis on the `Group` nodes based on their shared `Topic` nodes, I want to get a matrix where each observation (or row) represents a group and each column represents a topic, where the `(i, j)` entry of this matrix is binary and indicates whether group `i` has topic `j` (`1` indicates that the group has the topic, `0` otherwise).
 
-To do so, I first write a Cypher query that will get the data in long format.
+To do so, I first write a Cypher query that will get the data in long format:
 
 ```r
 query = "MATCH (g:Group)-[:HAS_TOPIC]->(t:Topic)
@@ -61,7 +62,7 @@ group_topics_long = cypher(graph, query)
 
 <a href="http://i.imgur.com/wTqxx0z.png" target="_blank"><img src="http://i.imgur.com/wTqxx0z.png" width="100%" height="100%"></a>
 
-Because I want a group to uniquely comprise a row, I'll convert the data to wide using [`reshape`](http://had.co.nz/reshape/):
+Because I want a group to uniquely comprise a row, I'll convert the data to wide using [reshape](http://had.co.nz/reshape/):
 
 ```r
 group_topics_wide = reshape(group_topics_long, 
@@ -94,7 +95,7 @@ colnames(group_topics_wide) = sub("hastopic.", "", colnames(group_topics_wide))
 
 <a href="http://i.imgur.com/R8x0cgN.png" target="_blank"><img src="http://i.imgur.com/R8x0cgN.png" width="100%" height="100%"></a>
 
-Now I'm ready to perform the cluster analysis. I decided to use [hierarchical agglomerative clustering](http://en.wikipedia.org/wiki/Hierarchical_clustering) (HAC) using [Ward's](http://en.wikipedia.org/wiki/Ward%27s_method) method, which is simple to do in `R`.
+Now I'm ready to perform the cluster analysis. I decided to use [hierarchical agglomerative clustering](http://en.wikipedia.org/wiki/Hierarchical_clustering) (HAC) using [Ward's](http://en.wikipedia.org/wiki/Ward%27s_method) method, which is simple to do in `R`. I decided on this approach because you do not need to know how many clusters you are looking for beforehand.
 
 First I need to convert my data frame `wide` into a matrix and get a dissimilarity matrix `d` using [dist](http://stat.ethz.ch/R-manual/R-patched/library/stats/html/dist.html):
 
@@ -103,11 +104,11 @@ group_topics_wide = as.matrix(group_topics_wide)
 d = dist(group_topics_wide)
 ```
 
-`d` is a 35 by 35 dissimilarity matrix, where entry `(i, j)` is the Euclidean distance between group `i` and group `j`.
+`d` is a 35 by 35 dissimilarity matrix, where entry `(i, j)` is the [Euclidean distance](http://en.wikipedia.org/wiki/Euclidean_distance) between group `i` and group `j` based on their shared topics. The lower the dissimilarity between two groups, the more topics they have in common.
 
 <a href="http://i.imgur.com/bpddNAT.png" target="_blank"><img src="http://i.imgur.com/bpddNAT.png" width="100%" height="100%"></a>
 
-With this, I can perform the hierarchical clustering with [hclust](http://stat.ethz.ch/R-manual/R-patched/library/stats/html/hclust.html):
+With this, I can perform the hierarchical clustering with [hclust](http://stat.ethz.ch/R-manual/R-patched/library/stats/html/hclust.html): 
 
 ```r
 hc = hclust(d, method = "ward")
@@ -129,7 +130,7 @@ Next, I need to figure out how many clusters I want to keep, or where I want to 
 
 <a href="http://i.imgur.com/c74ZM1r.png" target="_blank"><img src="http://i.imgur.com/c74ZM1r.png" width="100%" height="100%"></a>
 
-To figure out the optimal number of clusters, `k`,  I use the [fpc](http://cran.r-project.org/web/packages/fpc/index.html) package that has a function to do just that, `pamk`:
+Picking a number of clusters is somewhat of an art and will depend on your domain and intuition. Often, people will visually inspect the dendogram and choose a number of clusters based on some apparent separation. There are several ways to choose clusters, and one way might be better than another in different contexts. That is somewhat beyond the scope here, so I'll just use an `R` function to do it for me. The [fpc](http://cran.r-project.org/web/packages/fpc/index.html) package has a function `pamk` that chooses an optimal number of clusters `k` using the partinioning around medoid (PAM) algorithm, which I won't get into:
 
 ```r
 library(fpc)
@@ -203,7 +204,7 @@ Now each `Group` node is assigned to a cluster.
 
 To "paint a picture" of the clusters, I decided to look at the top-occurring words in the group descriptions for each cluster.
 
-For this I'll need the [getNodes]({{ site.url }}/RNeo4j/docs/get-nodes.html) function, which allows you to search for nodes with a Cypher query and return a list of `node` objects. Each `Group` node has a `description` property that has its text description.
+For this I'll need the [getNodes]({{ site.url }}/RNeo4j/docs/get-nodes.html) function, which allows you to search for nodes with a Cypher query and return a list of `node` objects. Each Group node has a `description` property that has its text description.
 
 ```r
 library(tm)
@@ -219,15 +220,15 @@ get_top_words = function(clust_id) {
   descriptions = lapply(groups, function(g) g$description)
   descriptions = lapply(descriptions, remove_html)
   descriptions = unlist(descriptions)
+  descriptions = tolower(descriptions)
   
   descrip_corpus = Corpus(VectorSource(descriptions))
-  descrip_corpus = tm_map(descrip_corpus, content_transformer(tolower))
   descrip_corpus = tm_map(descrip_corpus, removePunctuation)
   descrip_corpus = tm_map(descrip_corpus, function(d) removeWords(d, c(stopwords("english"), "data", "nosql")))
   
   tdm = TermDocumentMatrix(descrip_corpus)
   m = as.matrix(tdm)
-  v = sort(rowSums(m),decreasing = TRUE)
+  v = sort(rowSums(m), decreasing = TRUE)
   
   print(paste0("Top 5 words for cluster ", clust_id, "."))
   cat("\n")
