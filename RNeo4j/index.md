@@ -18,5 +18,3 @@ In your `R` environment, execute the following:
 install.packages("devtools")
 devtools::install_github("nicolewhite/RNeo4j")
 ```
-
-*Disclaimer:* This package is in pre-alpha phase. It is not optimized and it has not been thoroughly tested. Make a copy of your database before connecting with this package.
