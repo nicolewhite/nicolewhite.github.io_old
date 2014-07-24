@@ -70,7 +70,9 @@ edges = cypher(neo4j, edges_query)
 
 If I didn't care about clustering, I could convert `nodes` and `edges` to GraphJSON right now and that would be enough to visualize my graph using Alchemy.js:
 
-<a href="http://i.imgur.com/XdOWIaP.png" target="_blank"><img src="http://i.imgur.com/XdOWIaP.png" width="100%" height="100%"></a>
+<a href="http://nicolewhite.github.io/examples/alchemy/graph_nocluster.html" target="_blank"><img src="http://i.imgur.com/XdOWIaP.png" width="100%" height="100%"></a>
+**Click picture to go to live visualization.**
+
 
 But, I want to color the nodes by some meaningful cluster assignment. To identify these clusters, I'll use the [Girvan-Newman edge betweenness clustering algorithm](http://www.pnas.org/content/99/12/7821.full), which is easy with igraph's [edge.betweenness.community](http://igraph.org/r/doc/community.edge.betweenness.html) function. Conveniently, my `nodes` and `edges` data frames are not only ready for conversion to GraphJSON, but they are also in the format needed for creating an igraph graph object using [graph.data.frame](http://igraph.org/r/doc/graph.data.frame.html).
 
@@ -190,6 +192,7 @@ python -m SimpleHTTPServer
 
 This will return `Serving HTTP on 0.0.0.0 port 8000 ...`, making it so I can view my graph at `http://localhost:8000/graph.html`.
 
-<a href="http://i.imgur.com/yOMjiiE.png" target="_blank"><img src="http://i.imgur.com/yOMjiiE.png" width="100%" height="100%"></a>
+<a href="http://nicolewhite.github.io/examples/alchemy/graph.html" target="_blank"><img src="http://i.imgur.com/yOMjiiE.png" width="100%" height="100%"></a>
+**Click picture to go to live visualization.**
 
-We see that the clustering algorithm identified five clusters. You can explore this visualization yourself [LINK TO LIVE VIZ HERE]. Full code for this project is [on GitHub](https://github.com/nicolewhite/actor_cluster_alchemy).
+We can see that the clustering algorithm identified five clusters. Full code for this project is [on GitHub](https://github.com/nicolewhite/actor_cluster_alchemy).
