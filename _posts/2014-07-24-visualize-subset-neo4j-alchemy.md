@@ -195,4 +195,4 @@ This will return `Serving HTTP on 0.0.0.0 port 8000 ...`, making it so I can vie
 <a href="http://nicolewhite.github.io/examples/alchemy/graph.html" target="_blank"><img src="http://i.imgur.com/yOMjiiE.png" width="100%" height="100%"></a>
 **Click picture to go to live visualization.**
 
-We can see that the clustering algorithm identified five clusters. Full code for this project is [on GitHub](https://github.com/nicolewhite/actor_cluster_alchemy).
+We can see that the clustering algorithm identified five clusters, and the layout of the visualization shows nodes in the same cluster closer together. The full code for this project is [on GitHub](https://github.com/nicolewhite/actor_cluster_alchemy).
