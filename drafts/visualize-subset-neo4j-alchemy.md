@@ -182,7 +182,7 @@ I point to `actors.json` for my `dataSource` parameter in `graph.html` and set a
 </html>
 ```
 
-Finally, I can view my graph by navigating in the terminal to the directory where `actors.json` and `graph.html` sit and executing Python's SimpleHTTPServer module:
+Finally, I can view my graph visualization by navigating in the terminal to the directory where `actors.json` and `graph.html` sit and executing Python's SimpleHTTPServer module:
 
 ```
 python -m SimpleHTTPServer
@@ -192,4 +192,4 @@ This will return `Serving HTTP on 0.0.0.0 port 8000 ...`, making it so I can vie
 
 <a href="http://i.imgur.com/yOMjiiE.png" target="_blank"><img src="http://i.imgur.com/yOMjiiE.png" width="100%" height="100%"></a>
 
-Full code is [here](https://github.com/nicolewhite/actor_cluster_alchemy).
+We see that the clustering algorithm identified five clusters. You can explore this visualization yourself [LINK TO LIVE VIZ HERE]. Full code for this project is [on GitHub](https://github.com/nicolewhite/actor_cluster_alchemy).
