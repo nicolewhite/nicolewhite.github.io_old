@@ -8,7 +8,7 @@ comments: true
 
 Neo4j technology partner [Graph Alchemist](http://www.graphalchemist.com/) has open sourced a visualization library called [Alchemy.js](http://graphalchemist.github.io/Alchemy/#/) that's built in d3. It addresses the many issues with construcing a d3 force-directed graph, allowing for easier customization and a more intuitive way to pass in the JSON data.
 
-Alchemy's visualization accepts [GraphJSON](http://www.graphjson.org/) as input data and also supports coloring nodes by an assigned cluster, so I'll use [RNeo4j](/RNeo4j) to query the data from Neo4j, [igraph](http://igraph.org/r/) to run the clustering algorithm, and [jsonlite](http://cran.r-project.org/web/packages/jsonlite/vignettes/json-mapping.pdf) to convert the results to GraphJSON.
+Alchemy's visualization accepts [GraphJSON](http://graphalchemist.github.io/Alchemy/documentation/GraphJSON/) as input data and also supports coloring nodes by an assigned cluster, so I'll use [RNeo4j](/RNeo4j) to query the data from Neo4j, [igraph](http://igraph.org/r/) to run the clustering algorithm, and [jsonlite](http://cran.r-project.org/web/packages/jsonlite/vignettes/json-mapping.pdf) to convert the results to GraphJSON.
 
 To demonstrate these tools, I'll be using the sample movie dataset that ships with Neo4j. You can load this dataset within the Neo4j browser, but I've also included a function within my R package to do so:
 
