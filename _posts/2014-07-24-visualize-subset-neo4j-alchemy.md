@@ -104,6 +104,14 @@ The cluster assignments are now a column in the `nodes` data frame.
 4  32   Anthony Edwards       3
 5 111     Audrey Tautou       3
 6 118         Ben Miles       5
+
+   id              name cluster
+1  28      Aaron Sorkin       3
+2  13         Al Pacino       1
+3  57 Annabella Sciorra       6
+4  32   Anthony Edwards       4
+5 111     Audrey Tautou       5
+6 118         Ben Miles       2
 ```
 
 Now I need to convert both `nodes` and `edges` to GraphJSON and save them to a `.json` file, which is easy with jsonlite's `toJSON`.

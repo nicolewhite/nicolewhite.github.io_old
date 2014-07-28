@@ -3,7 +3,11 @@ title: getOrCreateNode
 layout: rneo4j
 ---
 
-# Create Unique Node or Retrieve Unique Node from the Graph Database
+# Create Unique Node or Retrieve Unique Node
+
+## Description
+
+Create a unique node or retrieve it if it already exists.
 
 ## Usage
 

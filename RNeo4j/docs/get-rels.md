@@ -3,7 +3,7 @@ title: getRels
 layout: rneo4j
 ---
 
-# Retrieve Relationships from the Graph Database with Cypher Queries
+# Retrieve Relationships with Cypher Queries
 
 ## Description
 

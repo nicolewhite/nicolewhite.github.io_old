@@ -1,18 +1,18 @@
 ---
-title: populate
+title: importSample
 layout: rneo4j
 ---
 
-# Populate the Graph Database
+# Import Sample Datasets
 
 ## Description
 
-Populate the graph database with example datasets supplied with this package.
+Import example datasets supplied with this package.
 
 ## Usage
 
 ```r
-populate(graph, data)
+importSample(graph, data)
 ```
 
 ## Arguments
@@ -33,5 +33,5 @@ Available Datasets
 ## Examples
 
  ```r
- populate(graph, "movies")
+ importSample(graph, "movies")
  ```

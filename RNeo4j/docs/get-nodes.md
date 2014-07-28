@@ -3,7 +3,7 @@ title: getNodes
 layout: rneo4j
 ---
 
-# Retrieve Nodes from the Graph Database with Cypher Queries
+# Retrieve Nodes with Cypher Queries
 
 ## Description
 

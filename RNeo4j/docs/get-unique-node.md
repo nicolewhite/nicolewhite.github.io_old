@@ -3,7 +3,7 @@ title: getUniqueNode
 layout: rneo4j
 ---
 
-# Retrieve Nodes from the Graph Database by Label and Property
+# Retrieve Nodes by Label and Property
 
 ## Description
 

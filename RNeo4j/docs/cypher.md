@@ -3,11 +3,11 @@ title: cypher
 layout: rneo4j
 ---
 
-# Cypher Queries
+# Retrieve Cypher Query Results as a Data Frame
 
 ## Description
 
-Execute Cypher queries and retrieve Cypher results as a data frame.
+Retrieve Cypher results query results as a data frame.
 
 ## Usage
 
