@@ -23,8 +23,8 @@ layout: rneo4j
 | [getUniqueNode](get-unique-node.html)        | Retrieve Nodes by Label and Property       						|
 | [getLabeledNodes](get-labeled-nodes.html)    | Retrieve Nodes by Label and Property       						|
 | [createRel](create-rel.html)                 | Create Relationships                                               |
-| [getSingleRel](get-rel-by-cypher.html)       | Retrieve Relationships with Cypher Queries 						|
-| [getRels](get-rel-by-cypher.html)            | Retrieve Relationships with Cypher Queries 						|		
+| [getSingleRel](get-single-rel.html)          | Retrieve Relationships with Cypher Queries 						|
+| [getRels](get-rels.html)                     | Retrieve Relationships with Cypher Queries 						|		
 | [startNode](start-node.html)                 | Retrieve Nodes from Relationships                                  |
 | [endNode](end-node.html)                     | Retrieve Nodes from Relationships                                  |
 | [incomingRels](incoming-rels.html)           | Retrieve Relationships from Nodes                                  |
