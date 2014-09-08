@@ -7,6 +7,7 @@ layout: rneo4j
 | Function                                     | Category                                                           |
 | -------------------------------------------- | ------------------------------------------------------------------ |
 | [startGraph](start-graph.html)               | Connect to the Database                                      		|
+| [browse](browse.html)                        | Open the Neo4j Browser                                             |
 | [addConstraint](add-constraint.html)         | Uniqueness Constraints                                             |
 | [getConstraint](get-constraint.html)         | Uniqueness Constraints                                             |
 | [dropConstraint](drop-constraint.html)       | Uniqueness Constraints                                             |
