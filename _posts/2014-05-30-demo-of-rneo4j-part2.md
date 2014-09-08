@@ -97,13 +97,14 @@ tweet_text = sapply(tweet_nodes, function(t) t$text)
 `tweet_text` is a character vector of all the tweets' text. Now I switch over to the `tm` package to remove stopwords, punctuation, etc., and then to the `RColorBrewer` and `wordcloud` packages to create the word cloud. Most of this code is shamelessly copied from the documentation for the `wordcloud` function.
 
 ```r
-# Remove links.
+library(stringr)
+# Remove links and convert to lowercase.
 tweet_text = sapply(tweet_text, function(t) str_replace_all(t, perl("http.+?(?=(\\s|$))"), ""))
+tweet_text = tolower(tweet_text)
 
 # Remove stopwords, punctuation, etc.
 tweet_corpus = Corpus(VectorSource(tweet_text))
 tweet_corpus = tm_map(tweet_corpus, removePunctuation)
-tweet_corpus = tm_map(tweet_corpus, tolower)
 tweet_corpus = tm_map(tweet_corpus, function(x) removeWords(x, c(stopwords("english"), "neo4j")))
 
 # Get term-document matrix and then a term-frequency data frame.
