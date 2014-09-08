@@ -139,8 +139,8 @@ Get all `Bar` names into a character vector.
 
 ```r
 bars = getLabeledNodes(graph, "Bar")
-bars.names = lapply(bars, function(b) b$name)
+bars_names = lapply(bars, function(b) b$name)
 
-bars.names
+bars_names
 [1] "Mugshots" "The Parlor" "Cheer Up Charlie's"
 ```
