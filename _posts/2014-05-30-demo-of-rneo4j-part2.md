@@ -65,9 +65,7 @@ I decided it would be fun to create a word cloud of all the tweets' text using t
 First, install and load the necessary packages.
 
 ```r
-install.packages("wordcloud")
-install.packages("tm")
-install.packages("RColorBrewer")
+install.packages(c("wordcloud", "tm", "RColorBrewer"))
 
 library(wordcloud)
 library(tm)
@@ -97,7 +95,6 @@ tweet_text = sapply(tweet_nodes, function(t) t$text)
 `tweet_text` is a character vector of all the tweets' text. Now I switch over to the `tm` package to remove stopwords, punctuation, etc., and then to the `RColorBrewer` and `wordcloud` packages to create the word cloud. Most of this code is shamelessly copied from the documentation for the `wordcloud` function.
 
 ```r
-library(stringr)
 # Remove links and convert to lowercase.
 tweet_text = sapply(tweet_text, function(t) str_replace_all(t, perl("http.+?(?=(\\s|$))"), ""))
 tweet_text = tolower(tweet_text)
