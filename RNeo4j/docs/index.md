@@ -35,7 +35,5 @@ layout: rneo4j
 | [delete](delete.html)                        | Delete Nodes and Relationships                                     |
 | [cypher](cypher.html)                        | Retrieve Cypher Query Results as a Data Frame        				|
 | [Transactions](transactions.html)   		   | Transactional Endpoint												|
-| [adjacencyMatrix](adjacency-matrix.html)     | Adjacency Matrices                                                 |
-| [degreeMatrix](degree-matrix.html)           | Degree Matrices                                                    |
 | [importSample](import-sample.html)           | Import Sample Datasets                                             |
 | [clear](clear.html)                          | Clear the Database                                                 |

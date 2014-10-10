@@ -12,7 +12,7 @@ Retrieve a single node from the graph by specifying its label and unique key = v
 ## Usage
 
 ```r
-getUniqueNode(graph, label, ...)
+getUniqueNode(graph, .label, ...)
 ```
 
 ## Arguments
@@ -20,7 +20,7 @@ getUniqueNode(graph, label, ...)
 | Parameter | Description     |
 | --------- | --------------- |
 | `graph`   | A graph object. |
-| `label`   | A node label. Accepts a string. |
+| `.label`   | A node label. Accepts a string. |
 | `...`     | A key = value pair by which the node label is uniquely constrained. Only accepts one key = value pair. |
 
 ## Value

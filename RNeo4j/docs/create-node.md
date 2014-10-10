@@ -12,7 +12,7 @@ Create a node in the graph with the given label and properties.
 ## Usage
 
 ```r
-createNode(graph, label = character(), ...)
+createNode(graph, .label = character(), ...)
 ```
 
 ## Arguments
@@ -20,7 +20,7 @@ createNode(graph, label = character(), ...)
 | Parameter | Description |
 | --------- | ----------- |
 | `graph`   | A graph object. |
-| `label`   | Optional node label(s). Accepts a string or vector of strings. |
+| `.label`  | Optional node label(s). Accepts a string or vector of strings. |
 | `...`     | Optional node properties in the form key = value (separated by commas). |
 
 ## Value

@@ -12,7 +12,7 @@ Create a unique node or retrieve it if it already exists.
 ## Usage
 
 ```r
-getOrCreateNode(graph, label, ...)
+getOrCreateNode(graph, .label, ...)
 ```
 
 ## Arguments
@@ -20,7 +20,7 @@ getOrCreateNode(graph, label, ...)
 | Parameter | Description     |
 | --------- | --------------- |
 | `graph`   | A graph object. |
-| `label`   | A node label. Accepts a string. |
+| `.label`   | A node label. Accepts a string. |
 | `...`     | Node properties in the form key = value, separated by commas. The first key = value pair listed must be the uniquely constrained key = value pair for the given node label. |
 
 ## Value

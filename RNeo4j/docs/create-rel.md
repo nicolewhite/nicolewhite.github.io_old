@@ -11,16 +11,16 @@ Create a relationship between two nodes with the given type and properties.
 ## Usage
 
 ```r
-createRel(fromNode, type, toNode, ...)
+createRel(.fromNode, .type, .toNode, ...)
 ```
 
 ## Arguments
 
 | Parameter | Description |
 | --------- | ----------- |
-| `fromNode` | A node object from which the relationship will be outgoing. |
-| `type` | A relationship type in the form of a string (see details). |
-| `toNode` | A node object to which the relationship will be incoming. |
+| `.fromNode` | A node object from which the relationship will be outgoing. |
+| `.type` | A relationship type in the form of a string (see details). |
+| `.toNode` | A node object to which the relationship will be incoming. |
 | `...` | Optional relationship properties in the form key = value (separated by commas). |
 
 ## Value

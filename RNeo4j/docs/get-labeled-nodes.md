@@ -12,7 +12,7 @@ Retrieve nodes from the graph with the specified label and optional key = value 
 ## Usage
 
 ```r
-getLabeledNodes(graph, label, ...)
+getLabeledNodes(graph, .label, ...)
 ```
 
 ## Arguments
@@ -20,7 +20,7 @@ getLabeledNodes(graph, label, ...)
 | Parameter | Description     |
 | --------- | --------------- |
 | `graph`   | A graph object. |
-| `label`   | A node label. Accepts a string. |
+| `.label`   | A node label. Accepts a string. |
 | `...`     | An optional key = value pair by which to filter the results. Only accepts one key = value pair. |
 
 ## Value

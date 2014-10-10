@@ -3,7 +3,7 @@ title: startGraph
 layout: rneo4j
 ---
 
-# Connect to the Neo4j Graph Database
+# Connect to the Database
 
 ## Description
 

@@ -12,7 +12,7 @@ Delete all nodes, relationships, constraints, and indexes from the graph databas
 ## Usage
 
 ```r
-clear(graph)
+clear(graph, input = TRUE)
 ```
 
 ## Arguments
@@ -20,6 +20,7 @@ clear(graph)
 | Parameter | Description | 
 | --------- | ----------- |
 | `graph`   | The graph object to be cleared. |
+| `input`   | Whether or not confirmation (in the form of external input) from the user should be required. |
 
 ## Examples
 
