@@ -9,7 +9,7 @@ category: R
 
 [Shiny](http://shiny.rstudio.com/) is my new favorite thing from RStudio. It's a web framework for R, which is nice for someone like me with little web development experience. The tutorial and gallery pages are a good place to start.
 
-At its most basic, a Shiny app consists of a `ui.R` file and a `server.R` file in the same directory, which was all that I needed to create [this app](https://nicolewhite.shinyapps.io/dfw-app/). You can use any R package that is on CRAN or GitHub in Shiny, so I am able to use RNeo4j to connect to a Neo4j database within my app.
+At its most basic, a Shiny app consists of a `ui.R` file and a `server.R` file in the same directory, which was all that I needed to create [this app](https://nicolewhite.shinyapps.io/dfw_app/). You can use any R package that is on CRAN or GitHub in Shiny, so I am able to use RNeo4j to connect to a Neo4j database within my app.
 
 I have a small database of Dallas Fort-Worth Airport restaurants stored in a sandbox instance on [GrapheneDB](http://www.graphenedb.com/). It has the following structure:
 
@@ -46,6 +46,26 @@ Below are my `ui.R` and `server.R` files, which are pretty easy to follow once y
 `ui.R`
 
 ```r
+library(shiny)
+library(RNeo4j)
+
+password = Sys.getenv("GRAPHENEDB_PASSWORD")
+url = Sys.getenv("GRAPHENEDB_URL")
+username = Sys.getenv("GRAPHENEDB_USERNAME")
+
+# Connect to Graphene DB.
+graph = startGraph(url = url,
+                   username = username,
+                   password = password)
+
+# Get categories and terminals.
+categories = getLabeledNodes(graph, "Category")
+categories = sapply(categories, function(c) c$name)
+
+terminals = getLabeledNodes(graph, "Terminal")
+terminals = sapply(terminals, function(t) t$name)
+
+# Build UI.
 shinyUI(fluidPage(
   titlePanel("DFW Food & Drink Finder"),
   sidebarLayout(
@@ -53,34 +73,18 @@ shinyUI(fluidPage(
       strong("Show me food & drink places in the following categories"),
       checkboxGroupInput("categories",
                          label = "",
-                         choices = list("American Cuisine" = "American Cuisine", 
-                                        "Asian" = "Asian", 
-                                        "Bar" = "Bar", 
-                                        "Barbecue" = "Barbecue", 
-                                        "Coffee" = "Coffee", 
-                                        "Desserts & Snacks" = "Desserts & Snacks", 
-                                        "Fast Food" = "Fast Food", 
-                                        "Grand Hyatt Dining" = "Grand Hyatt Dining", 
-                                        "Italian/Pizza" = "Italian/Pizza",
-                                        "Mexican/Southwest" = "Mexican/Southwest",
-                                        "Power Charging" = "Power Charging",
-                                        "Sandwich/Deli" = "Sandwich/Deli",
-                                        "Seafood" = "Seafood"),
-                         selected = c("Coffee", "Power Charging")),
+                         choices = categories,
+                         selected = sample(categories, 3)),
       strong("closest to gate"),
       numericInput("gate", 
                    label = "", 
-                   value = 10),
+                   value = sample(1:30, 1)),
       br(),
       strong("in terminal"),
       selectInput("terminal", 
                   label = "", 
-                  choices = list("A" = "A", 
-                                 "B" = "B",
-                                 "C" = "C",
-                                 "D" = "D",
-                                 "E" = "E"),
-                                 selected = "A"),
+                  choices = terminals,
+                  selected = sample(terminals, 1)),
       "Powered by", a("Neo4j", 
                       href = "http://www.neo4j.org/",
                       target = "_blank"), 
@@ -98,55 +102,47 @@ shinyUI(fluidPage(
 `server.R`
 
 ```r
+library(shiny)
 library(RNeo4j)
 
-graph = startGraph("http://dfw.sb02.stations.graphenedb.com:24789/db/data/",
-                   username = "dfw",
-                   password = "TOP_SECRET!!!")
+password = Sys.getenv("GRAPHENEDB_PASSWORD")
+url = Sys.getenv("GRAPHENEDB_URL")
+username = Sys.getenv("GRAPHENEDB_USERNAME")
 
-query1 = "MATCH (c:Category)<-[:IN_CATEGORY]-(p:Place)-[:AT_GATE]->(g:Gate)-[:IN_TERMINAL]->(t:Terminal {name:{terminal}})"
-          
-query2 = "WITH c, p, g, t, g.gate - {gate} AS dist
-          ORDER BY ABS(dist)
-          RETURN p.name AS Name, c.name AS Category, g.gate AS Gate, t.name AS Terminal"
+# Connect to Graphene DB.
+graph = startGraph(url = url,
+                   username = username,
+                   password = password)
+
+query = "
+MATCH (p:Place)-[:IN_CATEGORY]->(c:Category),
+      (p)-[:AT_GATE]->(g:Gate),
+      (g)-[:IN_TERMINAL]->(t:Terminal)
+WHERE c.name IN {categories} AND t.name = {terminal}
+WITH c, p, g, t, ABS(g.gate - {gate}) AS dist
+ORDER BY dist
+RETURN p.name AS Name, c.name AS Category, g.gate AS Gate, t.name AS Terminal
+"
 
 shinyServer(function(input, output) {
   output$restaurants <- renderTable({
-    if(length(input$categories) > 1) {
-      query = paste(query1, "WHERE c.name IN {categories}", query2)
-    } else if(length(input$categories == 1)) {
-      query = paste(query1, "WHERE c.name = {categories}", query2)
-    } else {
-      query = paste(query1, query2)
-    }
     data = cypher(graph, 
                   query,
-                  categories = input$categories,
+                  categories = as.list(input$categories),
                   terminal = input$terminal,
                   gate = input$gate)
-    return(data)
+    if(is.null(data)){
+      return(data)
+    } else{
+      data$Gate = as.integer(data$Gate)
+      return(data)
+    }
   })
 }
 )
 ```
 
-The URL, username, and password for the database are under the Connection tab in your GrapheneDB dashboard. In `server.R`, each input is referenced by whatever you named it in `ui.R`. In `ui.R`, each output is referenced by whatever you named it in `server.R`. Again, the Shiny tutorials and articles explain all of this very well. Both [startGraph](http://nicolewhite.github.io/RNeo4j/docs/start-graph.html) and [cypher](http://nicolewhite.github.io/RNeo4j/docs/cypher.html) are functions in my RNeo4j package.
-
-Each time the user changes one of the inputs, the code inside `renderTable()` is re-run to update the output with the user's new inputs.
-
-My `if-else` logic in `server.R` is handling the different data types that can be returned by `input$categories`:
-
-```r
-    if(length(input$categories) > 1) {
-      query = paste(query1, "WHERE c.name IN {categories}", query2)
-    } else if(length(input$categories == 1)) {
-      query = paste(query1, "WHERE c.name = {categories}", query2)
-    } else {
-      query = paste(query1, query2)
-    }
-```
-
-If the user selects more than one category, `input$categories` is a character vector and I want to check if the category name is in that vector; else, if the user selects only a single category, `input$categories` is a string and I want to check if the category name is equal to that string; else, if the user doesn't select any categories, `input$categories` is empty and I omit the conditional from the query altogether so that all categories are returned.
+The URL, username, and password for the database are under the Connection tab in your GrapheneDB dashboard. In `server.R`, each input is referenced by whatever you named it in `ui.R`. In `ui.R`, each output is referenced by whatever you named it in `server.R`. Again, the Shiny tutorials and articles explain all of this very well. Both [startGraph](http://nicolewhite.github.io/RNeo4j/docs/start-graph.html) and [cypher](http://nicolewhite.github.io/RNeo4j/docs/cypher.html) are functions in my RNeo4j package. Each time the user changes one of the inputs, the code inside `renderTable()` is re-run to update the output with the user's new inputs.
 
 To view your app locally in a browser, execute `runApp("dir")` where `"dir"` is your app's directory. You can update both `ui.R` and `server.R` while `runApp()` is working and view your changes by refreshing the page.
 
