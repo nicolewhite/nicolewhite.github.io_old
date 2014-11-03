@@ -4,7 +4,7 @@ layout: rneo4j
 
 # Sample Datasets
 
-Four sample datasets ship with this package. They can be imported with [importSample](/docs/import-sample.html). This page details the model for each dataset, then showcases example analyses.
+Four sample datasets ship with this package. They can be imported with [importSample](../docs/import-sample.html). This page details the model for each dataset, then showcases example analyses.
 
 <a name="Tweets"></a>
 ## Tweets
