@@ -7,7 +7,7 @@ layout: rneo4j
 
 ## Description
 
-Import example datasets supplied with this package.
+Populate the graph database with one of the sample datasets supplied with this package.
 
 ## Usage
 
