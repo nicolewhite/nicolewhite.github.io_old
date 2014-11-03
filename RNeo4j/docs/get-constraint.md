@@ -33,6 +33,9 @@ Supplying only a graph object as an argument returns all uniqueness constraints 
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, "Person", name = "Alice")
 bob = createNode(graph, "Person", name = "Bob")
 
@@ -41,25 +44,12 @@ austin = createNode(graph, "City", name = "Austin")
 
 addConstraint(graph, "Person", "name")
 addConstraint(graph, "City", "name")
-```
 
-Get all uniqueness constraints on `Person` nodes.
-
-```r
+# Get all uniqueness constraints on Person nodes.
 getConstraint(graph, "Person")
 
-#   property_keys  label       type
-# 1          name Person UNIQUENESS
-```
-
-Get all uniqueness constraints in the graph database.
-
-```r
+# Get all uniqueness constraints in the graph database.
 getConstraint(graph)
-
-#   property_keys  label       type
-# 1          name   City UNIQUENESS
-# 2          name Person UNIQUENESS
 ```
 
 ## See Also

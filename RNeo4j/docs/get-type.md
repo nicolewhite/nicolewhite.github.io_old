@@ -32,6 +32,9 @@ Supplying a relationship object returns the type of the relationship as a string
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, "Person", name = "Alice")
 bob = createNode(graph, "Person", name = "Bob")
 charles = createNode(graph, "Person", name = "Charles")
@@ -41,11 +44,7 @@ rel = createRel(alice, "KNOWS", bob)
 
 getType(rel)
 
-# [1] "KNOWS"
-
 getType(graph)
-
-# [1] "KNOWS" "WORKS_WITH"
 ```
 
 

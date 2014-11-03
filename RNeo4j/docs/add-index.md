@@ -30,6 +30,9 @@ An index already exists for any (label, key) pair that has a uniqueness constrai
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 createNode(graph, "Person", name = "Nicole", status = "Employed")
 createNode(graph, "Person", name = "Drew", status = "Employed")
 createNode(graph, "Person", name = "Aaron", status = "Unemployed")

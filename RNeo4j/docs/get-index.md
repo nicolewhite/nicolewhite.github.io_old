@@ -33,6 +33,9 @@ Supplying only a graph object as an argument returns all indexes in the graph da
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 createNode(graph, "Person", name = "Nicole", status = "Employed")
 createNode(graph, "Person", name = "Drew", status = "Employed")
 createNode(graph, "Person", name = "Aaron", status = "Unemployed")
@@ -42,25 +45,12 @@ createNode(graph, "School", name = "Louisiana State University", type = "Public"
 
 addIndex(graph, "Person", "status")
 addIndex(graph, "School", "type")
-```
 
-Get all indexes on the `Person` node label.
-
-```r
+# Get all indexes on the Person node label.
 getIndex(graph, "Person")
 
-#   property_keys  label
-# 1        status Person
-```
-
-Get all indexes in the graph database.
-
-```r
+# Get all indexes in the graph database.
 getIndex(graph)
-
-#   property_keys  label
-# 1        status Person
-# 2          type School
 ```
 
 ## See Also

@@ -34,14 +34,14 @@ If your Cypher query returns more than one node, you will just arbitrarily get t
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 createNode(graph, "Person", name = "Alice", age = 23)
 createNode(graph, "Person", name = "Bob", age = 22)
 createNode(graph, "Person", name = "Charles", age = 25)
-```
 
-Query without parameters.
-
-```r
+# Query without parameters.
 query = "MATCH (p:Person)
 		 WITH p
 		 ORDER BY p.age DESC
@@ -50,34 +50,11 @@ query = "MATCH (p:Person)
 		 
 oldest = getSingleNode(graph, query)
 
-oldest
-
-# Labels: Person
-#
-# $name
-#[1] "Charles"
-#
-# $age
-# [1] 25
-```
-
-Query with parameters.
-
-```r
+# Query with parameters.
 query = "MATCH (p:Person {name:{name}}) 
          RETURN p"
 
 alice = getSingleNode(graph, query, name = "Alice")
-
-alice
-
-# Labels: Person
-#
-# $name
-# [1] "Alice"
-#
-# $age
-# [1] 23
 ```
 
 ## See Also

@@ -25,19 +25,16 @@ addLabel(node, ...)
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, name = "Alice")
 bob = createNode(graph, name = "Bob")
-```
 
-Add a single label.
-
-```r
+# Add a single label.
 addLabel(alice, "Student")
-```
 
-Add multiple labels.
-
-```r
+# Add multiple labels.
 addLabel(bob, "Person", "Student")
 ```
 

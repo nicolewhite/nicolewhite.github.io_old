@@ -29,6 +29,9 @@ A list of relationship objects.
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, "Person", name = "Alice")
 bob = createNode(graph, "Person", name = "Bob")
 charles = createNode(graph, "Person", name = "Charles")
@@ -41,42 +44,24 @@ createRel(charles, "KNOWS", david)
 createRel(alice, "WORKS_WITH", david)
 createRel(bob, "WORKS_WITH", david)
 createRel(bob, "WORKS_WITH", charles)
-```
 
-Get all incoming relationships on the `david` node.
-
-```r
+# Get all incoming relationships on the david node.
 david_incoming = incomingRels(david)
 
 sapply(david_incoming, getType)
 
-# [1] "WORKS_WITH" "WORKS_WITH" "KNOWS"
-```
-
-Get the start nodes of all incoming relationships.
-
-```r
+# Get the start nodes of all incoming relationships.
 starts = lapply(david_incoming, startNode)
 
 sapply(starts, function(s) s$name)
 
-# [1] "Alice" "Bob" "Charles"
-```
-
-Get all incoming `WORKS_WITH` relationships on the `charles` node.
-
-```r
+# Get all incoming "WORKS_WITH" relationships on the charles node.
 charles_incoming_works = incomingRels(charles, "WORKS_WITH")
-```
 
-Get the start nodes of all incoming `WORKS_WITH` relationships.
-
-```r
+# Get the start nodes of all incoming "WORKS_WITH" relationships.
 starts = lapply(charles_incoming_works, startNode)
 
 sapply(starts, function(s) s$name)
-
-# [1] "Bob"
 ```
 
 ## See Also

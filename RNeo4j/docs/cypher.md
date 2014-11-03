@@ -36,60 +36,42 @@ A data frame. Cypher queries returning no results will return NULL.
 ## Examples
 
 ```r
-createNode(graph, name = "Alice", age = 23)
-createNode(graph, name = "Bob", age = 22)
-createNode(graph, name = "Charles", age = 25)
-```
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
 
-Query without parameters.
+alice = createNode(graph, "Person", name = "Alice", age = 23)
+bob = createNode(graph, "Person", name = "Bob", age = 22)
+charles = createNode(graph, "Person", name = "Charles", age = 25)
+david = createNode(graph, "Person", name = "David", age = 20)
 
-```r
+createRel(alice, "KNOWS", bob)
+createRel(alice, "KNOWS", charles)
+createRel(charles, "KNOWS", david)
+
+# Query without parameters.
 cypher(graph, "MATCH n RETURN n.name, n.age")
 
-#    n.name n.age
-# 1   Alice    23
-# 2     Bob    22
-# 3 Charles    25
-```
-
-Query with parameters.
-
-```r
+# Query with parameters.
 cypher(graph, 
 	   "MATCH n WHERE n.age < {age} RETURN n.name, n.age", 
 	   age = 24)
 
-#   n.name n.age
-# 1  Alice    23
-# 2    Bob    22
-```
-
-Query with array parameter.
-
-```r
+# Query with array parameter.
 names = c("Alice", "Charles")
 cypher(graph,
 	   "MATCH n WHERE n.name IN {names} RETURN n.name, n.age",
 	   names = names)
+     
+# Query that returns a collection.
+# The 'friends' column will have lists as values.
+df = cypher(graph, "MATCH (n)-[:KNOWS]-(m) RETURN n.name, COLLECT(m.name) AS friends, COUNT(m) AS num_friends")
+sapply(df, class)
+df$friends
 
-#    n.name n.age
-# 1 Charles    25
-# 2   Alice    23
-```
-
-Query that doesn't return anything.
-
-```r
+# Query that doesn't return anything.
 cypher(graph, 
-	   "MATCH n SET n.born = {year} - n.age REMOVE n.age",
-	   year = 2014)
-
-# Cypher executed, but did not return any results.
+	     "MATCH n SET n.born = {year} - n.age REMOVE n.age",
+	     year = 2014)
 
 cypher(graph, 'MATCH n RETURN n.name, n.born')
-
-#    n.name n.born
-# 1   Alice   1991
-# 2     Bob   1992
-# 3 Charles   1989
 ```

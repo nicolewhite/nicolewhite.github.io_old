@@ -28,10 +28,13 @@ Nodes with incoming or outgoing relationships cannot be deleted. All incoming an
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, name = "Alice")
 bob = createNode(graph, name = "Bob")
 
-rel = createRel(alice, "WORKS_WITH", bob)
+rel = createRel(alice, "works with", bob)
 
 delete(rel)
 delete(alice, bob)

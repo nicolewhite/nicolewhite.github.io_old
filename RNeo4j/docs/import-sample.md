@@ -24,14 +24,21 @@ importSample(graph, data)
 
 ## Details
 
-Available Datasets
+### Available Datasets
 
-| Name | Description | Size |
-| ---- | ----------- | ---- |
-| "movies" | Graph of movies, actors. | 19.55 MB |
+| Name | Description |
+| ---- | ----------- |
+| [tweets](../samples/#Tweets) | Users, tweets, hashtags. |
+| [dfw](../samples/#DFW) | Terminals, gates, places. |
+| [caltrain](../samples/#Caltrain) | Trains, stops, zones. | 
+| [movies](../samples/#Movies) | Movies, actors. |
 
 ## Examples
 
  ```r
- importSample(graph, "movies")
+graph = startGraph("http://localhost:7474/db/data/")
+
+importSample(graph, "tweets")
+summary(graph)
+getConstraint(graph)
  ```

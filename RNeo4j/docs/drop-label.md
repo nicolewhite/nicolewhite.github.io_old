@@ -25,15 +25,17 @@ dropLabel(node, ..., all = FALSE)
 
 ## Examples
 
-Drop the `Person` label from the `alice` node.
-
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
+alice = createNode(graph, "Person", name = "Alice")
+bob = createNode(graph, c("Person", "Student"), name = "Bob")
+
+# Drop the Person label from the alice node.
 dropLabel(alice, "Person")
-```
 
-Drop all labels from the `bob` node.
-
-```r
+# Drop all labels from the bob node.
 dropLabel(bob, all = TRUE)
 ```
 

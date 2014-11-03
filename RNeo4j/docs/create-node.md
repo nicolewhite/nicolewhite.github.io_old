@@ -29,27 +29,20 @@ A node object.
 
 ## Examples
 
-Create a node without properties.
-
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
+# Node without properties.
 mystery = createNode(graph)
-```
 
-Create a node with properties.
-
-```r
+# Node with properties.
 alice = createNode(graph, name = "Alice", age = 23)
-```
 
-Create a node with a label and properties. Arrays can be added as properties.
-
-```r
+# Node with label and properties. Arrays can be added as properties as well.
 bob = createNode(graph, "Person", name = "Bob", age = 24, kids = c("Jenny", "Larry"))
-```
 
-Create a node with multiple labels and properties.
-
-```r
+# Node with multiple labels and properties.
 charles = createNode(graph, 
 					 c("Person", "Student"), 
 					 name = "Charles", 

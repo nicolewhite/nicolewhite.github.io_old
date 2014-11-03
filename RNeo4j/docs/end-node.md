@@ -7,19 +7,19 @@ layout: rneo4j
 
 ## Description
 
-Retrieve the ending node from a relationship object. This is the node for which the relationship is incoming.
+Retrieve the ending node from a relationship or path object.
 
 ## Usage
 
 ```r
-endNode(rel)
+endNode(object)
 ```
 
 ## Arguments
 
 | Parameter | Description     |
 | --------- | --------------- |
-| `rel`     | A relationship object. |
+| `object`     | A relationship or path object. |
 
 ## Value
 
@@ -28,6 +28,9 @@ A node object.
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, "Person", name = "Alice")
 bob = createNode(graph, "Person", name = "Bob")
 
@@ -35,10 +38,15 @@ rel = createRel(alice, "WORKS_WITH", bob)
 
 endNode(rel)
 
-# Labels: Person
-#
-# $name
-# [1] "Bob"
+query = "
+MATCH p = (a:Person)-[:WORKS_WITH]->(b:Person)
+WHERE a.name = 'Alice' AND b.name = 'Bob'
+RETURN p
+"
+
+path = getSinglePath(graph, query)
+
+endNode(path)
 ```
 
 ## See Also

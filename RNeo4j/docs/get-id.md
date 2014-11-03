@@ -28,19 +28,18 @@ An integer.
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, "Person", name = "Alice")
 bob = createNode(graph, "Person", name = "Bob")
 charles = createNode(graph, "Person", name = "Charles")
 
 getID(alice)
 
-# [1] 0
-
 nodes = getNodes(graph, "MATCH n RETURN n")
 
 sapply(nodes, getID)
-
-# [1] 0 1 2
 ```
 
 

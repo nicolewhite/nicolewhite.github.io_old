@@ -34,19 +34,15 @@ A uniqueness constraint must exist on the (label, key) pair in order to use this
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 createNode(graph, "Person", name = "Alice")
 createNode(graph, "Person", name = "Bob")
 
 addConstraint(graph, "Person", "name")
 
 alice = getUniqueNode(graph, "Person", name = "Alice")
-
-alice
-
-# Labels: Person
-#
-# $name
-# [1] "Alice"
 ```
 
 ## See Also

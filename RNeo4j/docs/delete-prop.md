@@ -30,48 +30,21 @@ A node or relationship object.
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, "Person", name = "Alice", age = 23, status = "Married")
 bob = createNode(graph, "Person", name = "Bob", age = 22, status = "Married")
 charles = createNode(graph, "Person", name = "Charles", age = 25, status = "Unmarried")
-```
 
-Delete the `age` property from the `alice` node.
-
-```r
+# Delete the "age" property from the alice node.
 alice = deleteProp(alice, "age")
 
-alice
-
-# Labels: Person
-#
-# $status
-# [1] "Married"
-#
-# $name
-# [1] "Alice"
-```
-
-Delete the `name` and `age` properties from the `bob` node.
-
-```r
+# Delete the "name" and "age" properties from the Bob node.
 bob = deleteProp(bob, "name", "age")
 
-bob
-
-# Labels: Person
-# 
-# $status
-# [1] "Married"
-```
-
-Delete all properties from the `charles` node.
-
-```r
+# Delete all properties from the Charles node.
 charles = deleteProp(charles, all = TRUE)
-
-charles
-
-# Labels: Person
 ```
 
 ## See Also

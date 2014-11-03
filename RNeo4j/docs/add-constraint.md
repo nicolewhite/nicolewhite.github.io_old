@@ -34,6 +34,9 @@ Attempting to add a uniqueness constraint to data that violates the uniqueness c
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 createNode(graph, "Person", name = "Alice")
 createNode(graph, "Person", name = "Bob")
 

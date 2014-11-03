@@ -25,5 +25,6 @@ clear(graph, input = TRUE)
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
 clear(graph)
 ```

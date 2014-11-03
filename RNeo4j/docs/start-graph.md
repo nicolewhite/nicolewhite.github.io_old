@@ -29,15 +29,11 @@ A graph object.
 
 ## Examples
 
-A local db.
-
 ```r
+# A local db.
 graph = startGraph("http://localhost:7474/db/data/")
-```
 
-A remote [Graphene](http://www.graphenedb.com/) db.
-
-```r
+# A remote graphene db.
 graph = startGraph(url = "http://test.sb02.stations.graphenedb.com:24789/db/data/", 
 				   username = "test", 
 				   password = "ftDPkChL641gBe5s9xBO")

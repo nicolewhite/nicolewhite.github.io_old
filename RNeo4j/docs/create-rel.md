@@ -30,19 +30,20 @@ A relationship object.
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, "Person", name = "Alice")
 bob = createNode(graph, "Person", name = "Bob")
 charles = createNode(graph, "Person", name = "Charles")
-```
 
-Relationship without properties.
-
-```r
+# Relationship without properties.
 createRel(alice, "WORKS_WITH", bob)
-```
 
-Relationship with properties.
-
-```r
+# Relationship with properties.
 createRel(bob, "KNOWS", charles, since = 2000, through = "Work")
 ```
+
+## See Also
+
+[startNode](start-node.html), [endNode](end-node.html)

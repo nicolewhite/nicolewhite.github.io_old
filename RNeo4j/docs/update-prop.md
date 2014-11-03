@@ -28,9 +28,13 @@ A node or relationship object.
 
 ## Examples
 
-Update the `age` property and add an `eyes` property to the `alice` node.
-
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
+alice = createNode(graph, "Person", name = "Alice")
+
+# Update the age property and add an eyes property to the alice node.
 alice = updateProp(alice, age = 24, eyes = "green")
 ```
 

@@ -32,27 +32,20 @@ Supplying a graph object returns all node labels in the graph database. Supplyin
 ## Examples
 
 ```r
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph)
+
 alice = createNode(graph, name = "Alice")
 bob = createNode(graph, name = "Bob")
 
 addLabel(alice, "Student")
 addLabel(bob, "Person", "Student")
-```
 
-Get all labels on the `alice` node.
-
-```r
+# View all labels on the alice node.
 getLabel(alice)
 
-# [1] "Student"
-```
-
-Get all node labels in the graph database.
-
-```r
+# View all node labels in the graph database.
 getLabel(graph)
-
-# [1] "Student" "Person"
 ```
 
 ## See Also
