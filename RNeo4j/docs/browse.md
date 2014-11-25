@@ -7,12 +7,12 @@ layout: rneo4j
 
 ## Description
 
-Open the Neo4j browser in the default web browser.
+Open the Neo4j browser.
 
 ## Usage
 
 ```r
-browse(graph)
+browse(graph, viewer = TRUE)
 ```
 
 ## Arguments
@@ -20,6 +20,7 @@ browse(graph)
 | Parameter | Description | 
 | --------- | ----------- |
 | `graph`   | A graph object. |
+| `viewer`  | Logical, whether to view in IDE's viewer pane. |
 
 ## Examples
 
