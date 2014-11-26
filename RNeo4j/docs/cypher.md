@@ -25,7 +25,7 @@ cypher(graph, query, ...)
 
 ## Details
 
-If returning data, you can only query for tabular results. That is, this method has no current functionality for Cypher results containing array properties, collections, nodes, or relationships.
+If returning data, you can only query for tabular results. That is, you can't return node or relationship entities. See [getNodes](get-nodes.html) and [getRels](get-rels.html) for returning entities.
 
 You can send Cypher queries without any return values (i.e., a Cypher query without the word `RETURN` in it).
 
