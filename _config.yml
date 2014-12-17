@@ -1,6 +1,7 @@
 markdown: redcarpet
 redcarpet:
   extensions: ["tables"]
+exclude: ["*.Rmd"]
 url: http://nicolewhite.github.io
 source: /Users/nicole/Documents/GitHub/nicolewhite.github.io
 destination: /Users/nicole/Desktop/_site
