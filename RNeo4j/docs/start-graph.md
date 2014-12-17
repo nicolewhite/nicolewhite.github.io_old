@@ -12,7 +12,10 @@ Establish a connection to the graph database.
 ## Usage
 
 ```r
-startGraph(url, username = character(), password = character())
+startGraph(url, 
+		   username = character(), 
+		   password = character(),
+		   opts = list())
 ```
 
 ## Arguments
@@ -22,6 +25,7 @@ startGraph(url, username = character(), password = character())
 | `url`     | The URL of the graph database. Accepts a string.  |
 | `username` | If the database is remote, your username. Accepts a string. |
 | `password` | If the database is remote, your password. Accepts a string. |
+| `opts` | Optional HTTP settings. |
 
 ## Value
 
@@ -37,4 +41,8 @@ graph = startGraph("http://localhost:7474/db/data/")
 graph = startGraph(url = "http://test.sb02.stations.graphenedb.com:24789/db/data/", 
 				   username = "test", 
 				   password = "ftDPkChL641gBe5s9xBO")
+
+# Set a timeout of 3 seconds.
+graph = startGraph(url = "http://localhost:7474/db/data/", 
+              	   opts = list(timeout=3))
 ```
