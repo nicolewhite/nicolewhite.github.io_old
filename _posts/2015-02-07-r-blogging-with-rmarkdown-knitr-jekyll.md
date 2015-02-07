@@ -9,14 +9,14 @@ category: R
 
 {% raw %}
 
-I've been blogging with Jeykll for a while now, where most of my blogs contain snippets of R code. Previously, my workflow was somewhat sloppy: I would copy-paste the snippets of R code into my `.md` file along with the expected output of the code (e.g. printing a data.frame or number). However, I often ran into problems where I would change the code snippet but forget to change the output, thus creating disagreements between what the code snippet was doing and the expected output I had copy-pasted in previously. There's also the possibility that the R code had errors, but I wouldn't know because my blog posts weren't derived directly from the R code itself.
+I've been blogging with [Jekyll](http://jekyllrb.com/) for a while now, where most of my blogs contain snippets of R code. Previously, my workflow was somewhat sloppy: I would copy-paste the snippets of R code into my `.md` file along with the expected output of the code (e.g. printing a data.frame or number). However, I often ran into problems where I would change the code snippet but forget to change the output, thus creating disagreements between what the code snippet was doing and the expected output I had copy-pasted in previously. There's also the possibility that the R code had errors, but I wouldn't know because my blog posts weren't derived directly from the R code itself.
 
 Now, I've started writing my blog posts in R markdown (a `.Rmd` file), then using [knitr](http://yihui.name/knitr/) to convert that `.Rmd` file into a `.md` file. This solves the main two problems described above. With this new workflow:
 
 * The output is ensured to agree with what the R code is doing.
 * There will not be any errors in my R code, because `knitr` will stop and throw an error instead of creating the `.md` file.
 
-The rest of this blog post assumes a basic knowledge of [Jekyll](http://jekyllrb.com/) and that you plan to use it with [GitHub pages](https://pages.github.com/). 
+The rest of this blog post assumes a basic knowledge of Jekyll and that you plan to use it with [GitHub pages](https://pages.github.com/). 
 
 The following walkthrough refers to [this live example](http://nicolewhite.github.io/r-knitr-jekyll/2015/02/07/exploring-the-cars-dataset.html). My new workflow is as follows:
 
@@ -63,7 +63,7 @@ The following walkthrough refers to [this live example](http://nicolewhite.githu
     file.copy(pics, todir)
     ```
 
-    I have `r2jekyll.R` sitting in the `_drafts` directory, and it was made executable with `chmod +x r2jekyll.R`. To convert my `.Rmd` file to a `.md` file and take care of any `.png` file housekeeping, I nagivate to my `_drafts` directory and execute in the terminal:
+    Be sure to make `r2jekyll.R` executable with `chmod +x r2jekyll.R`. Then, to convert my `.Rmd` file to a `.md` file and take care of any `.png` file housekeeping, I nagivate to my `_drafts` directory and execute in the terminal:
     
     ```
     ./r2jekyll.R exploring-the-cars-dataset.Rmd
@@ -82,7 +82,7 @@ The following walkthrough refers to [this live example](http://nicolewhite.githu
     jekyll serve
     ```
     
-    This allows me to open my browser and preview the post at [http://localhost:4000](http://localhost:4000) before pushing it to my repository.
+    This allows me to open my browser and preview the post at `http://localhost:4000` before pushing it to my repository.
     
 See the code for this example blog [here](https://github.com/nicolewhite/r-knitr-jekyll/tree/gh-pages).
 
