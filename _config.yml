@@ -3,4 +3,4 @@ redcarpet:
   extensions: ["tables"]
 exclude: ["*.Rmd"]
 name: Nicole White
-decription: R | Python | Math
+description: R | Python | Math
