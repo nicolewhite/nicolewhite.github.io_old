@@ -15,6 +15,7 @@ Establish a connection to the graph database.
 startGraph(url, 
 		   username = character(), 
 		   password = character(),
+		   auth_token = character(),
 		   opts = list())
 ```
 
