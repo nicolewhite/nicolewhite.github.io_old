@@ -1,0 +1,197 @@
+---
+title: "Understanding Waiting Times Between Events with the Poisson and Exponential Distributions"
+output: pdf_document
+layout: post
+---
+
+```{r, echo=FALSE}
+lambda=2
+```
+
+# Understanding Waiting Times Between Events with the Poisson and Exponential Distributions
+
+A webhook POSTs to our database each time a particular event occurs on our website. I was mindlessly monitoring the log files one day and noticed it had been roughly 90 seconds since our database had been hit by this request. Before worrying, though, I wondered how rare that observation is. What is the likelihood of waiting 1.5 minutes for the next request?
+
+This is a probability problem that can be solved with an understanding of Poisson processes and the exponential distribution. A Poisson process is any process where independent events occur at constant known rate, e.g. babies are born at a particular hospital at a rate of 2 per hour, or calls come into a call center at a rate of 10 per minute. The exponential distribution is the probability distribution that models the waiting times between these events, e.g. the times between calls at the call center are exponentially distributed. To model Poisson processes and exponental distributions, we need to know two things: a time-unit \\(t\\) and a rate \\(\lambda\\). 
+
+## Poisson Distribution
+
+Let's start with the Poisson distribution: If we let \\(N(t)\\) denote the number of events that occur between now and time \\(t\\), then the probability that \\(n\\) events occur within the next \\(t\\) time-units, or \\(P(N(t) = n)\\), is
+
+$$
+  P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}
+$$
+
+Let's say I've crunched the numbers and found that we receive an average of `r lambda` requests from this webhook per minute. Thus, the time-unit \\(t\\) is one minute and the rate \\(\lambda\\) is `r lambda`. Knowing these, we can answer questions such as:
+
+* What is the probability that we receive no requests in the next two minutes?
+```{r, echo=FALSE}
+t=2
+n=0
+```
+
+$$
+  P(N(`r t`) = 0) = \frac{(`r lambda` \cdot `r t`)^`r n` e^{-`r lambda` \cdot `r t`}}{`r n`!} = e^{-`r lambda*t`} = `r exp(-(lambda*t))`
+$$
+
+* What is the probability that we receive at least two requests in the next three minutes?
+```{r, echo=FALSE}
+t=3
+n=2
+```
+
+$$
+\begin{aligned}
+P(N(`r t`) \geq `r n`) & = 1 - P(N(`r t`) = 1) - P(N(`r t`) = 0) \\\\
+                       & = 1 - \frac{(`r lambda` \cdot `r t`)^`r n-1` e^{-`r lambda` \cdot `r t`}}{`r n-1`!} - \frac{(`r lambda` \cdot `r t`)^`r n-2` e^{-`r lambda` \cdot `r t`}}{`r n-2`!} \\\\
+                       & = 1 - `r t*n`e^{-`r t*n`} - e^{-`r t*n`} \\\\
+                       & = 1 - `r t*n + 1`e^{-`r t*n`} \\\\
+                       & = `r 1 - (t*n + 1) * exp(-t*n)` \\\\
+\end{aligned}
+$$
+
+For those who prefer reading code:
+
+```python
+from math import pow, exp, factorial
+
+class Poisson:
+
+    def __init__(self, rate):
+        self.rate = rate
+
+    def prob_exactly(self, n, t):
+        rate = self.rate * t
+        return pow(rate, n) * exp(-rate) / factorial(n)
+
+    def prob_at_least(self, n, t):
+        complements = range(n)
+        total = 0.0
+
+        for c in complements:
+            p = self.prob_exactly(c, t)
+            total += p
+
+        return 1 - total
+
+    def prob_at_most(self, n, t):
+        return 1 - self.prob_at_least(n + 1, t)
+
+pois = Poisson(2)
+print pois.prob_exactly(0, 2)
+print pois.prob_at_least(2, 3)
+```
+
+```
+0.0183156388887
+0.982648734763
+```
+
+## Exponential Distribution
+
+Let's move onto the exponential distribution. As mentioned earlier, the waiting times between events in a Poisson process are exponentially distributed. The exponential distribution can be derived from the Poisson distribution: Let \\(X\\) be the waiting time between now and the next event. The probability that \\(X\\) is greater than \\(t\\) is identical to the probability that 0 events occur between now and time \\(t\\), which we already know:
+
+$$
+P(X > t) = P(N(t) = 0) = \frac{(\lambda t)^0 e^{-\lambda t}}{0!} = e^{-\lambda t}
+$$
+
+We also know that the probability of \\(X\\) being less than or equal to \\(t\\) is the complement of \\(X\\) being greater than \\(t\\):
+
+$$
+P(X \leq t) = 1 - P(X > t) = 1 - e^{-\lambda t}
+$$
+
+Thus, the distribution function of the waiting times between events in a Poisson process is \\(1 - e^{-\lambda t}\\). With this, and recalling that our time-unit \\(t\\) is one minute and our rate \\(\lambda\\) is `r lambda` requests per minute, we can answer questions such as:
+
+* What is the probability that the next request occurs within 15 seconds?
+
+```{r, echo=FALSE}
+t=0.25
+```
+
+$$
+P(X \leq `r t`) = 1 - e^{-`r lambda` \cdot `r t`} = 1 - e^{-`r lambda * t`} = `r 1 - exp(-lambda*t)`
+$$
+
+* What is the probability that the next request is between 15 and 30 seconds from now?
+
+```{r, echo=FALSE}
+t1=0.25
+t2=0.5
+```
+
+$$
+\begin{aligned}
+P(`r t1` \leq X \leq `r t2`) & = P(X \leq `r t2`) - P(X \leq `r t1`) \\\\
+                             & = (1 - e^{-`r lambda` \cdot `r t2`}) - (1 - e^{-`r lambda` \cdot `r t1`}) \\\\
+                             & = e^{-`r lambda * t1`} - e^{-`r lambda * t2`} \\\\
+                             & = `r (1 - exp(-lambda*t2)) - (1 - exp(-lambda*t1))`
+\end{aligned}
+$$
+
+Again, for those who prefer reading code:
+
+```python
+from math import exp
+
+class Exponential:
+
+    def __init__(self, rate):
+        self.rate = rate
+
+    def prob_less_than_or_equal(self, t):
+        rate = self.rate * t
+        return 1 - exp(-rate)
+
+    def prob_greater_than(self, t):
+        return 1 - self.prob_less_than_or_equal(t)
+
+    def prob_between(self, t1, t2):
+        p1 = self.prob_less_than_or_equal(t1)
+        p2 = self.prob_less_than_or_equal(t2)
+
+        return p2 - p1
+
+expo = Exponential(2)
+print expo.prob_less_than_or_equal(0.25)
+print expo.prob_between(0.25, 0.5)
+```
+
+```
+0.393469340287
+0.238651218541
+```
+
+## Answer
+
+So, what is the probability that we wait 1.5 minutes for the next request?
+
+```{r, echo=FALSE}
+t=1.5
+```
+
+$$
+P(X > `r t`) = e^{-`r lambda` \cdot `r t`} = e^{-`r lambda * t`} = `r exp(-lambda*t)`
+$$
+
+The probability of waiting 1.5 minutes for the next request is `r round(100 * exp(-lambda*t), 2)`%.
+
+```python
+expo = Exponential(2)
+print expo.prob_greater_than(1.5)
+```
+
+```
+0.0497870683679
+```
+
+For this particular example, we could have answered the question with the Poisson distribution by finding \\(P(N(1.5) = 0))\\). 
+
+```python
+pois = Poisson(2)
+print pois.prob_exactly(0, 1.5)
+```
+
+```
+0.0497870683679
+```
