@@ -3,4 +3,3 @@ redcarpet:
   extensions: ["tables"]
 exclude: ["*.Rmd"]
 name: Nicole White
-description: R | Python | Math
