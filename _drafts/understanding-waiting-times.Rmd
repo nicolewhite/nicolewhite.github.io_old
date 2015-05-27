@@ -1,5 +1,5 @@
 ---
-title: "Understanding Waiting Times Between Events with the Poisson and Exponential Distributions"
+title: "Understanding Waiting Times Between Events with the Poisson and Exponential Distributions."
 output: pdf_document
 layout: post
 ---
@@ -8,9 +8,9 @@ layout: post
 lambda=2
 ```
 
-# Understanding Waiting Times Between Events with the Poisson and Exponential Distributions
+# Understanding Waiting Times Between Events with the Poisson and Exponential Distributions.
 
-A webhook POSTs to our database each time a particular event occurs on our website. I was mindlessly monitoring the log files one day and noticed it had been roughly 90 seconds since our database had been hit by this request. Before worrying, though, I wondered how rare that observation is. What is the likelihood of waiting 1.5 minutes for the next request?
+A webhook POSTs to our database each time a particular event occurs on our website. We receive about two of these requests per minute. I was mindlessly monitoring the log files one day and noticed it had been roughly 90 seconds since our database had been hit by this request. Before worrying, though, I wondered how rare that observation is. What is the likelihood of waiting longer than 1.5 minutes for the next request?
 
 This is a probability problem that can be solved with an understanding of Poisson processes and the exponential distribution. A Poisson process is any process where independent events occur at constant known rate, e.g. babies are born at a particular hospital at a rate of 2 per hour, or calls come into a call center at a rate of 10 per minute. The exponential distribution is the probability distribution that models the waiting times between these events, e.g. the times between calls at the call center are exponentially distributed. To model Poisson processes and exponental distributions, we need to know two things: a time-unit \\(t\\) and a rate \\(\lambda\\). 
 
@@ -22,7 +22,7 @@ $$
   P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}
 $$
 
-Let's say I've crunched the numbers and found that we receive an average of `r lambda` requests from this webhook per minute. Thus, the time-unit \\(t\\) is one minute and the rate \\(\lambda\\) is `r lambda`. Knowing these, we can answer questions such as:
+As mentioned earlier, we receive an average of `r lambda` requests from this webhook per minute. Thus, the time-unit \\(t\\) is one minute and the rate \\(\lambda\\) is `r lambda`. Knowing these, we can answer questions such as:
 
 * What is the probability that we receive no requests in the next two minutes?
 ```{r, echo=FALSE}
@@ -164,7 +164,7 @@ print expo.prob_between(0.25, 0.5)
 
 ## Answer
 
-So, what is the probability that we wait 1.5 minutes for the next request?
+So, what is the probability that we wait longer than 1.5 minutes for the next request?
 
 ```{r, echo=FALSE}
 t=1.5
@@ -174,7 +174,7 @@ $$
 P(X > `r t`) = e^{-`r lambda` \cdot `r t`} = e^{-`r lambda * t`} = `r exp(-lambda*t)`
 $$
 
-The probability of waiting 1.5 minutes for the next request is `r round(100 * exp(-lambda*t), 2)`%.
+The probability of waiting longer than 1.5 minutes for the next request is `r round(100 * exp(-lambda*t), 2)`%.
 
 ```python
 expo = Exponential(2)
