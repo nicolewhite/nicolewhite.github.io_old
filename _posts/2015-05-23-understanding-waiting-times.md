@@ -10,7 +10,7 @@ layout: post
 
 A webhook POSTs to our database each time a particular event occurs on our website. We receive about two of these requests per minute. I was mindlessly monitoring the log files one day and noticed it had been roughly 90 seconds since our database had been hit by this request. Before worrying, though, I wondered how rare that observation is. What is the likelihood of waiting longer than 1.5 minutes for the next request?
 
-This is a probability problem that can be solved with an understanding of Poisson processes and the exponential distribution. A Poisson process is any process where independent events occur at constant known rate, e.g. babies are born at a particular hospital at a rate of 2 per hour, or calls come into a call center at a rate of 10 per minute. The exponential distribution is the probability distribution that models the waiting times between these events, e.g. the times between calls at the call center are exponentially distributed. To model Poisson processes and exponental distributions, we need to know two things: a time-unit \\(t\\) and a rate \\(\lambda\\). 
+This is a probability problem that can be solved with an understanding of Poisson processes and the exponential distribution. A Poisson process is any process where independent events occur at constant known rate, e.g. babies are born at a hospital at a rate of three per hour, or calls come into a call center at a rate of 10 per minute. The exponential distribution is the probability distribution that models the waiting times between these events, e.g. the times between calls at the call center are exponentially distributed. To model Poisson processes and exponental distributions, we need to know two things: a time-unit \\(t\\) and a rate \\(\lambda\\). 
 
 ## Poisson Distribution
 
@@ -119,8 +119,6 @@ $$
 Again, for those who prefer reading code:
 
 ```python
-from math import exp
-
 class Exponential:
 
     def __init__(self, rate):
@@ -149,9 +147,9 @@ print expo.prob_between(0.25, 0.5)
 0.238651218541
 ```
 
-## Answer
+## Conclusion
 
-So, what is the probability that we wait longer than 1.5 minutes for the next request?
+Now, referring back to the original question: What is the probability of waiting longer than 1.5 minutes for the next request?
 
 
 
@@ -162,7 +160,6 @@ $$
 The probability of waiting longer than 1.5 minutes for the next request is 4.98%.
 
 ```python
-expo = Exponential(2)
 print expo.prob_greater_than(1.5)
 ```
 
@@ -173,7 +170,6 @@ print expo.prob_greater_than(1.5)
 For this particular example, we could have answered the question with the Poisson distribution by finding \\(P(N(1.5) = 0))\\). 
 
 ```python
-pois = Poisson(2)
 print pois.prob_exactly(0, 1.5)
 ```
 
