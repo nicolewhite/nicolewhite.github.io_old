@@ -1,9 +1,7 @@
 ---
 title: "What's New in RNeo4j?"
-comments: yes
+comments: true
 layout: post
-output: html_document
-category: R
 ---
 
 
@@ -147,10 +145,10 @@ lapply(n, function(x) sapply(x, `[[`, 'name'))
 
 ```
 ## [[1]]
-## [1] "Alice" "Bob"   "David"
+## [1] "Alice"  "Elaine" "David" 
 ## 
 ## [[2]]
-## [1] "Alice"  "Elaine" "David"
+## [1] "Alice" "Bob"   "David"
 ```
 
 `allShortestPaths` found both of the these paths because they tie for the shortest path (they're both length-two paths). `shortestPath`, on the other hand, returned just one of these paths arbitrarily.
@@ -182,13 +180,13 @@ summary(neo4j)
 
 ```
 ##      This       To   That
-## 1   Tweet    USING Source
-## 2   Tweet MENTIONS   User
-## 3   Tweet RETWEETS  Tweet
-## 4    User    POSTS  Tweet
-## 5   Tweet CONTAINS   Link
-## 6   Tweet REPLY_TO  Tweet
-## 7 Hashtag     TAGS  Tweet
+## 1    User    POSTS  Tweet
+## 2 Hashtag     TAGS  Tweet
+## 3   Tweet MENTIONS   User
+## 4   Tweet REPLY_TO  Tweet
+## 5   Tweet RETWEETS  Tweet
+## 6   Tweet    USING Source
+## 7   Tweet CONTAINS   Link
 ```
 
 We can look at the top-mentioned users with [cypher](http://nicolewhite.github.io/RNeo4j/docs/cypher.html), which returns tabular Cypher results as a data.frame:
@@ -256,7 +254,7 @@ cat(test[1])
 
 ```
 ## Error in function (type, msg, asError = TRUE)  : 
-##   Operation timed out after 2000 milliseconds with 327680 bytes received
+##   Operation timed out after 2002 milliseconds with 0 bytes received
 ```
 
 Note, however, that the query continues to run server-side. See [Mark's blog post](http://www.markhneedham.com/blog/2013/10/17/neo4j-setting-query-timeout/) on setting server timeouts.

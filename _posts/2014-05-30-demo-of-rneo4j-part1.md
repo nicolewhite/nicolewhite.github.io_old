@@ -2,7 +2,6 @@
 layout: post
 comments: true
 title: Demo of RNeo4j Part 1 - Building a Database.
-category: R
 ---
 
 # Demo of RNeo4j Part 1: Building a Database

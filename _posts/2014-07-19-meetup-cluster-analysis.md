@@ -2,7 +2,6 @@
 title: A Cluster Analysis of London NoSQL Meetup Groups.
 layout: post
 comments: true
-categories: R
 ---
 
 # A Cluster Analysis of London NoSQL Meetup Groups

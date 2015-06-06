@@ -2,7 +2,6 @@
 layout: post
 comments: true
 title: Upload Your Last.fm Data to Neo4j with RNeo4j and the Transactional Endpoint.
-category: R
 ---
 
 # Upload Your Last.fm Data to Neo4j with RNeo4j and the Transactional Endpoint.

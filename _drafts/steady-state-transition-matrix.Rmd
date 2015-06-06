@@ -10,8 +10,7 @@ A Markov process consists of states and probabilities, where the probability of 
 
 Consider the following Markov process, where each state is my mood on a given day (assume these are mutually exclusive).
 
-
-```r
+```{r}
 p = matrix(c(0.4,0.0,0.1,
              0.4,0.5,0.3,
              0.2,0.5,0.6),
@@ -25,29 +24,14 @@ rownames(p) = states
 p
 ```
 
-```
-##        Happy Gloomy Sleepy
-## Happy    0.4    0.4    0.2
-## Gloomy   0.0    0.5    0.5
-## Sleepy   0.1    0.3    0.6
-```
-
 \\(P\\) is the one-time-step transition probability matrix (in this example, a time-step is a day), where the \\((i, j)\\) entry indicates the probability that my mood one day from now will be in state \\(j\\) given that my mood is currently in state \\(i\\). For example, if I am gloomy today, then tomorrow there is a 50% chance that I will be gloomy and a 50% chance that I will be sleepy.
 
 To get the two-time-step transition probability matrix, you raise the one-time-step transition probability matrix, \\(P\\), to the second power (\\(P^2\\)).
 
-
-```r
+```{r, message=FALSE, warning=FALSE}
 library(expm)
 
 p %^% 2
-```
-
-```
-##        Happy Gloomy Sleepy
-## Happy   0.18   0.42   0.40
-## Gloomy  0.05   0.40   0.55
-## Sleepy  0.10   0.37   0.53
 ```
 
 \\(P^2\\) is the two-time-step transition probability matrix. The \\((i, j)\\) entry indicates the probability that my mood two days from now will be in state \\(j\\) given that my mood is currently in state \\(i\\). For example, if I am happy today, then two days from now there is an 18% chance that I will be happy, a 42% chance that I will be gloomy, and a 40% chance that I will be sleepy.
@@ -56,27 +40,10 @@ To get the \\(k\\)-time-step transition probability matrix, you raise the one-ti
 
 As you continue raising \\(P\\) to higher powers, you'll start to notice that the probabilities are converging.
 
-
-```r
+```{r}
 p %^% 5
-```
 
-```
-##          Happy  Gloomy  Sleepy
-## Happy  0.08886 0.38766 0.52348
-## Gloomy 0.08675 0.38530 0.52795
-## Sleepy 0.08824 0.38617 0.52559
-```
-
-```r
 p %^% 20
-```
-
-```
-##            Happy    Gloomy    Sleepy
-## Happy  0.0877193 0.3859649 0.5263158
-## Gloomy 0.0877193 0.3859649 0.5263158
-## Sleepy 0.0877193 0.3859649 0.5263158
 ```
 
 For Markov processes that are finite, [irreducible](http://en.wikipedia.org/wiki/Markov_chain#Reducibility), and [aperiodic](http://en.wikipedia.org/wiki/Markov_chain#Periodicity), there is a long-run equilibrium that is reached despite the starting state. For example, when looking at \\(P^{20}\\), the chance that I will be sleepy 20 days from now is 52.63% regardless of what my mood is today.
@@ -129,41 +96,19 @@ It should be noted that \\(A\\) is equivalent to \\((P - I)^T\\) (where \\(I\\) 
 
 In `R`, we can solve for \\(x\\) with the following:
 
-
-```r
+```{r}
 n = ncol(p)
 A = t(p - diag(n))
 A = rbind(A, rep(1, n))
 b = c(rep(0, n), 1)
 
 A
-```
 
-```
-##        Happy Gloomy Sleepy
-## Happy   -0.6    0.0    0.1
-## Gloomy   0.4   -0.5    0.3
-## Sleepy   0.2    0.5   -0.4
-##          1.0    1.0    1.0
-```
-
-```r
 b
-```
 
-```
-## [1] 0 0 0 1
-```
-
-```r
 mu = qr.solve(A, b)
 
 mu
-```
-
-```
-##     Happy    Gloomy    Sleepy 
-## 0.0877193 0.3859649 0.5263158
 ```
 
 ## Solve with Eigenvectors
@@ -175,8 +120,7 @@ is a left-eigenvector of \\(A\\) where \\(\lambda\\) are the eigenvalues.
 
 Because \\(\mu\\) is a solution to \\( \mu P = \mu \\), \\(\mu\\) is a left-eigenvector of the square matrix \\(P\\) corresponding to the eigenvalue \\(\lambda = 1\\). In `R`, the left-eigenvectors can be found by executing [eigen](http://stat.ethz.ch/R-manual/R-devel/library/base/html/eigen.html) on the transpose of \\(P\\).
 
-
-```r
+```{r}
 e = eigen(t(p))
 first = Re(e$vectors[ ,1])
 
@@ -184,10 +128,6 @@ first = Re(e$vectors[ ,1])
 mu = first / sum(first)
 
 mu
-```
-
-```
-## [1] 0.0877193 0.3859649 0.5263158
 ```
 
 ## Solve with Null Spaces
@@ -214,8 +154,7 @@ This might have been clear when you re-arranged the system of equations and set 
 
 Conveniently, the [pracma](http://cran.r-project.org/web/packages/pracma/index.html) package has a function [nullspace](http://www.inside-r.org/packages/cran/pracma/docs/nullspace) for finding the basis of a null space.
 
-
-```r
+```{r, message=FALSE, warning=FALSE}
 library(pracma)
 
 A = t(p - diag(n))
@@ -225,11 +164,4 @@ basis = nullspace(A)
 mu = basis / sum(basis)
 
 mu
-```
-
-```
-##           [,1]
-## [1,] 0.0877193
-## [2,] 0.3859649
-## [3,] 0.5263158
 ```

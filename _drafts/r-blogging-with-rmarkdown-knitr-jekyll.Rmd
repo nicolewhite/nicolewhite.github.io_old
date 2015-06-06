@@ -2,7 +2,6 @@
 title: "Blogging About R Code with R Markdown, Knitr, and Jekyll."
 layout: post
 comments: true
-category: R
 ---
 
 # Blogging About R Code with R Markdown, Knitr, and Jekyll.

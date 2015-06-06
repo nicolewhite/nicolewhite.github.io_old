@@ -2,7 +2,6 @@
 title: Create a Shiny App Powered by a Neo4j Database.
 layout: post
 comments: true
-category: R
 ---
 
 # Create a Shiny App Powered by a Neo4j Database.

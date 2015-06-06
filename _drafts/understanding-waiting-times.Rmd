@@ -1,7 +1,7 @@
 ---
 title: "Understanding Waiting Times Between Events with the Poisson and Exponential Distributions."
-output: pdf_document
 layout: post
+comments: true
 ---
 
 ```{r, echo=FALSE}
