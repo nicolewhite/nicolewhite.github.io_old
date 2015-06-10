@@ -1,10 +1,10 @@
 ---
 layout: post
 comments: true
-title: Find the Steady State Distribution of a Transition Probability Matrix in R.
+title: Find the Steady State Distribution of a Markov Process in R.
 ---
 
-# Find the Steady State Distribution of a Transition Probability Matrix in R.
+# Find the Steady State Distribution of a Markov Process in R.
 
 A Markov process consists of states and probabilities, where the probability of transitioning from one state to another depends only on the current state and not on the past; it is _memoryless_. A Markov process is often depicted as a transition probability matrix, where the \\((i, j)\\) entry of this matrix is the probability that the Markov process transitions to state \\(j\\) at the next time-step given that the process is currently in state \\(i\\).
 
