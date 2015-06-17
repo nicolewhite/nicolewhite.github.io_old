@@ -1,0 +1,63 @@
+---
+title: "RNeo4j & visNetwork."
+output: html_document
+---
+
+```{r, message=FALSE}
+library(visNetwork)
+library(RNeo4j)
+
+graph = startGraph("http://localhost:7474/db/data/")
+importSample(graph, "movies", input=F)
+
+node_query = "
+MATCH n 
+RETURN ID(n) AS id, 
+       COALESCE(n.name, n.title) AS label,
+       LABELS(n)[0] AS group
+"
+
+edge_query = "
+MATCH (n)-[r]->(m)
+RETURN ID(n) AS from,
+       ID(m) AS to,
+       TYPE(r) AS label
+"
+
+nodes = cypher(graph, node_query)
+edges = cypher(graph, edge_query)
+
+visNetwork(nodes, edges, width="100%") %>% visEdges(style = "arrow")
+```
+
+
+```{r}
+LIMIT = 100
+
+node_query = "
+MATCH n
+WITH n, RAND() AS random
+ORDER BY random
+LIMIT {limit}
+RETURN ID(n) AS id, 
+       COALESCE(n.name, n.title) AS label,
+       LABELS(n)[0] AS group
+"
+
+edge_query = "
+MATCH (n)-[r]->(m)
+WHERE ID(n) IN {ids} AND ID(m) IN {ids}
+RETURN ID(n) AS from,
+       ID(m) AS to,
+       TYPE(r) AS label
+"
+
+nodes = cypher(graph, node_query, limit=LIMIT)
+edges = cypher(graph, edge_query, ids=nodes$id)
+
+# If you don't want disconnected nodes:
+nodes$connected = nodes$id %in% c(edges$from, edges$to)
+nodes = nodes[nodes$connected, ]
+
+visNetwork(nodes, edges, width="100%") %>% visEdges(style = "arrow")
+```
