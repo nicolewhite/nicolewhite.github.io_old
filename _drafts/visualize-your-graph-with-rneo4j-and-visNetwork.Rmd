@@ -1,0 +1,166 @@
+---
+title: "Visualize Your Graph with RNeo4j and visNetwork."
+output: html_document
+layout: post
+---
+
+```{r, echo=FALSE}
+library(RNeo4j)
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph, input=F)
+```
+
+Someone recently [posted an issue](https://github.com/nicolewhite/RNeo4j/issues/28) on RNeo4j where they needed help visualizing their graph in [visNetwork](https://github.com/dataknowledge/visNetwork), which has turned out to be a pretty fun R package. I decided to turn my answer into a blog post.
+
+Both RNeo4j and visNetwork need to be installed with `devtools`:
+
+```{r, eval=FALSE}
+devtools::install_github("nicolewhite/RNeo4j")
+devtools::install_github("dataknowledge/visNetwork")
+```
+
+```{r, message=FALSE}
+library(RNeo4j)
+library(visNetwork)
+```
+
+Then, with [Neo4j](http://neo4j.com) installed and running, we can connect to our graph and create some data:
+
+```{r, results='hide'}
+graph = startGraph("http://localhost:7474/db/data/")
+
+nicole = createNode(graph, "Person", name="Nicole")
+greta = createNode(graph, "Person", name="Greta")
+kenny = createNode(graph, "Person", name="Kenny")
+adam = createNode(graph, "Person", name="Adam")
+
+neo4j = createNode(graph, "Company", name="Neo4j")
+digital = createNode(graph, "Company", name="Digital Insights")
+docker = createNode(graph, "Company", name="Docker")
+
+createRel(nicole, "WORKS_FOR", neo4j)
+createRel(greta, "WORKS_FOR", neo4j)
+createRel(kenny, "WORKS_FOR", digital)
+createRel(adam, "WORKS_FOR", docker)
+
+createRel(greta, "KNOWS", adam)
+createRel(nicole, "KNOWS", kenny)
+createRel(kenny, "KNOWS", adam)
+```
+
+To create a visualization in visNetwork, you need to pass a nodes data.frame and an edges data.frame. The nodes data.frame requires an `id` column, which is how the node will be identified in the edges data.frame. Optionally, you can pass a `label` column to give the node a text label and a `group` column, where nodes in the same group will be the same color. The edges data.frame requires `from` and `to` columns, with the `id` of the start node and the `id` of the end node for each relationship. These columns should correspond to the `id` column in the nodes data.frame. Optionally, the edges data.frame can also have a `label` column, which will give the edges a text label. Let's write some Cypher queries that will get us all this info in the form we need:
+
+```{r}
+node_query = "
+MATCH n
+RETURN n.name AS id,
+       n.name AS label,
+       LABELS(n)[0] AS group
+"
+
+edge_query = "
+MATCH (n)-[r]->(m)
+RETURN n.name AS from,
+       m.name AS to,
+       TYPE(r) AS label
+"
+
+nodes = cypher(graph, node_query)
+edges = cypher(graph, edge_query)
+```
+
+This gives us the following data.frames:
+
+```{r}
+nodes
+edges
+```
+
+Now we can pass these to `visNetwork`:
+
+```{r}
+visNetwork(nodes, edges)
+```
+
+Nodes can also be sized by a value:
+
+```{r}
+neo4j = updateProp(neo4j, employees=1)
+digital = updateProp(digital, employees=2)
+docker = updateProp(docker, employees=3)
+
+node_query = "
+MATCH n
+RETURN n.name AS id,
+       n.name AS label,
+       LABELS(n)[0] AS group,
+       n.employees AS value
+"
+
+nodes = cypher(graph, node_query)
+nodes[is.na(nodes)] = 1
+
+nodes
+```
+
+```{r}
+visNetwork(nodes, edges)
+```
+
+For a more thorough walkthrough of all the styling available, check out visNetwork's [example page](http://dataknowledge.github.io/visNetwork/).
+
+If your graph is much larger, it's more likely you'll want to visualize a small subset of your graph. You can do this by writing a more specific Cypher query, or by getting a random graph. Let's import the movie dataset and go through how we would display a random graph.
+
+```{r}
+importSample(graph, "movies", input=F)
+```
+
+First, let's get 30 random nodes:
+
+```{r}
+LIMIT = 30
+
+node_query = "
+MATCH n
+WITH n, RAND() AS random
+ORDER BY random
+LIMIT {limit}
+RETURN ID(n) AS id, 
+       COALESCE(n.name, n.title) AS label,
+       LABELS(n)[0] AS group
+"
+
+nodes = cypher(graph, node_query, limit=LIMIT)
+
+head(nodes)
+nrow(nodes)
+```
+
+Now, in our query for edges, we only want nodes that were found in the previous query:
+
+```{r}
+edge_query = "
+MATCH (n)-[r]->(m)
+WHERE ID(n) IN {ids} AND ID(m) IN {ids}
+RETURN ID(n) AS from,
+       ID(m) AS to,
+       TYPE(r) AS label
+"
+
+edges = cypher(graph, edge_query, ids=nodes$id)
+
+head(edges)
+```
+
+```{r}
+visNetwork(nodes, edges)
+```
+
+This gives us a lot of disconnected nodes, unfortunately! We can filter those out, though:
+
+```{r}
+nodes$connected = nodes$id %in% c(edges$from, edges$to)
+nodes = nodes[nodes$connected, ]
+
+visNetwork(nodes, edges)
+```
