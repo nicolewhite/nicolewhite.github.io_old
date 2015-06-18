@@ -60,7 +60,7 @@ createRel(adam, &quot;WORKS_FOR&quot;, docker)
 createRel(greta, &quot;KNOWS&quot;, adam)
 createRel(nicole, &quot;KNOWS&quot;, kenny)
 createRel(kenny, &quot;KNOWS&quot;, adam)</code></pre>
-<p>To create a visualization in visNetwork, you need to pass a nodes data.frame and an edges data.frame. The nodes data.frame requires an <code>id</code> column, which is how the node will be identified in the edges data.frame. Optionally, you can pass a <code>label</code> column to give the node a text label and a <code>group</code> column, where nodes in the same group will be the same color. The edges data.frame requires <code>from</code> and <code>to</code> columns, with the <code>id</code> of the start node and the <code>id</code> of the end node for each relationship. These columns should correspond to the <code>id</code> column in the nodes data.frame. Optionally, the edges data.frame can also have a <code>label</code> column, which will give the edges a text label. Let’s write some Cypher queries that will get us all this info in the form we need:</p>
+<p>To create a visualization in visNetwork, you need to pass a nodes dataframe and an edges dataframe. The nodes dataframe requires an <code>id</code> column, which is how the node will be identified in the edges dataframe. Optionally, you can pass a <code>label</code> column to give the node a text label and a <code>group</code> column, where nodes in the same group will be the same color. The edges dataframe requires <code>from</code> and <code>to</code> columns, with the <code>id</code> of the start node and the <code>id</code> of the end node for each relationship. These columns should correspond to the <code>id</code> column in the nodes dataframe. Optionally, the edges dataframe can also have a <code>label</code> column, which will give the edges a text label. Let’s write some Cypher queries that will get us all this info in the form we need:</p>
 <pre class="r"><code>node_query = &quot;
 MATCH n
 RETURN n.name AS id,
@@ -77,7 +77,7 @@ RETURN n.name AS from,
 
 nodes = cypher(graph, node_query)
 edges = cypher(graph, edge_query)</code></pre>
-<p>This gives us the following data.frames:</p>
+<p>This gives us the following dataframes:</p>
 <pre class="r"><code>nodes</code></pre>
 <pre><code>##                 id            label   group
 ## 1           Nicole           Nicole  Person
