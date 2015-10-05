@@ -287,16 +287,16 @@ The probabilities in each row now sum to 1.
 Finally, I convert the dictionaries to a list of tuples so that they can be maintained in order of probability descending (dictionaries have no sense of order).
 
 ```python
-for key, value in markov.items():
-    ordered = sorted(markov[key].items(), key=lambda x:x[1], reverse=True)
-    markov[key] = ordered
+for word in markov.keys():
+    ordered = sorted(markov[word].items(), key=lambda x:x[1], reverse=True)
+    markov[word] = ordered
 ```
 
 Now I have a data structure that can tell me which keywords are most likely to be used next given the current keyword. For example, with this pretend dataset, if the current keyword is `MATCH`, then the probability of the next keyword being `WHERE` is 67% and the probability of the next keyword being `WITH` is 33%: 
 
 ```python
 for state in markov["MATCH"]:
-        print(state)
+    print(state)
 ```
 
 ```
