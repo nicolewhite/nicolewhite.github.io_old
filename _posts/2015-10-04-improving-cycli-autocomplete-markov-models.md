@@ -148,7 +148,7 @@ for query in queries:
     # Drop the indexes.
     positions = [x[0] for x in positions]
 
-    # Prepend the empty string state to the query.
+    # Prepend the empty state to the list of keywords.
     positions = [""] + positions
 
     # Build the Markov model.
