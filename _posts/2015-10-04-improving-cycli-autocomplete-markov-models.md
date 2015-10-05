@@ -217,14 +217,14 @@ print(markov)
 Next, I divide each value in each row by the sum of the row so that I have probabilities.
 
 ```python
-for key, value in markov.items():
-    denominator = sum(value.values())
+for word, states in markov.items():
+    denominator = sum(states.values())
 
     if denominator == 0:
         # Absorbing state.
-        markov[key] = {i: 1.0 if i == key else 0.0 for i in value.keys()}
+        markov[word] = {i: 1.0 if i == word else 0.0 for i in states.keys()}
     elif denominator > 0:
-        markov[key] = {i:j / denominator for i, j in value.items()}
+        markov[word] = {i:j / denominator for i, j in states.items()}
 
 print(markov)
 ```
