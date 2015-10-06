@@ -1,12 +1,12 @@
 ---
-title: "Improving Cycli's Autocomplete with Markov Chains."
+title: "Improving My CLI's Autocomplete with Markov Chains."
 layout: post
 comments: true
 ---
 
-# Improving Cycli's Autocomplete with Markov Chains.
+# Improving My CLI's Autocomplete with Markov Chains.
 
-For a while I've been working on [cycli](https://github.com/nicolewhite/cycli), a command line interface for Neo4j's Cypher query language. As demonstrated below, it autocompletes on your node labels, relationship types, property keys, and Cypher keywords. The autocompletion of the lattermost in this list, Cypher keywords, is the focus of this post.
+For a while I've been working on [cycli](https://github.com/nicolewhite/cycli), a command line interface (CLI) for Neo4j's Cypher query language. As demonstrated below, it autocompletes on your node labels, relationship types, property keys, and Cypher keywords. The autocompletion of the lattermost in this list, Cypher keywords, is the focus of this post.
 
 <figure align="center">
     <img src="https://raw.githubusercontent.com/nicolewhite/cycli/master/screenshots/output.gif" alt="gif" />
