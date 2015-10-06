@@ -371,7 +371,7 @@ for state in markov["COUNT"][:5]:
 
 ## The Results
 
-Revisiting the example from earlier, where typing a `W` in previous versions of `cycli` yielded an alphabetical list of Cypher keywords with no regard to whether or not they were valid or appropriate, we now get a list of autocompletions where the order of the keyword suggestions is tailored to the context of the query.
+Revisiting the examples from earlier, where typing a `W` in previous versions of `cycli` yielded an alphabetical list of Cypher keywords with no regard to whether or not they were valid or appropriate, we now get a list of autocompletions where the order of the keyword suggestions is tailored to the context of the query.
 
 <table align="center">
   <tr>
