@@ -1,0 +1,247 @@
+---
+layout: post
+comments: true
+title: Spymaster 2000.
+---
+
+```{r, echo=FALSE}
+library(knitr)
+opts_knit$set(root.dir = "~/GitHub/codenames")
+options(stringsAsFactors=FALSE)
+```
+
+# Spymaster 2000.
+
+I've been playing a game called [Codenames](https://boardgamegeek.com/boardgame/178900/codenames) with my friends recently. There is a grid of 25 words and two teams. Some of these words belong to the red team and some of them belong to the blue team. Each team has a spymaster; these players know which words belong to which team and they are tasked with giving one-word clues that point to multiple words belonging to their team. There is also an assassin word. If your team guesses the assassin word, your team automatically loses the game. It's important for the spymaster to give clues related to their words but that don't accidentally steer their teammates toward guessing the assassin word.
+
+A board might look like this:
+
+<table align="center" cellpadding="2" border="1">
+<tr><td>WATER</td><td>PLATE</td><td>TEMP</td><td>TEMP</td><td>OIL</td></tr>
+<tr><td>TEMP</td><td>TEMP</td><td>TEMP</td><td>EAT</td><td>TEMP</td></tr>
+<tr><td>TEMP</td><td>TEMP</td><td>TEMP</td><td>TEMP</td><td>TEMP</td></tr>
+<tr><td>STREAM</td><td>TEMP</td><td>TEMP</td><td>GASOLINE</td><td>TEMP</td></tr>
+<tr><td>ENGINE</td><td>SPOON</td><td>TEMP</td><td>TEMP</td><td>TEMP</td></tr>
+</table>
+
+As I mentioned, only the spymasters know which words belong to which team. Their view would look like this:
+
+<table align="center" cellpadding="2" border="1">
+<tr><td bgcolor="red">WATER</td><td bgcolor="red">PLATE</td><td bgcolor="lightblue">TEMP</td><td>TEMP</td><td bgcolor="red">OIL</td></tr>
+<tr><td bgcolor="lightblue">TEMP</td><td>TEMP</td><td bgcolor="lightblue">TEMP</td><td bgcolor="red">EAT</td><td>TEMP</td></tr>
+<tr><td bgcolor="lightblue">TEMP</td><td>TEMP</td><td>TEMP</td><td bgcolor="darkgrey">TEMP</td><td>TEMP</td></tr>
+<tr><td bgcolor="red">STREAM</td><td bgcolor="lightblue">TEMP</td><td bgcolor="lightblue">TEMP</td><td bgcolor="red">GASOLINE</td><td bgcolor="lightblue">TEMP</td></tr>
+<tr><td bgcolor="red">ENGINE</td><td bgcolor="red">SPOON</td><td>TEMP</td><td>TEMP</td><td>TEMP</td></tr>
+</table>
+
+I want to build a program that can play spymaster; that is, a program that can take the information given in the above board and figure out the best clues to give to its teammates. I call this the Spymaster 2000.
+
+Spymaster 2000 is going to play spymaster for the red team. Here is my overall strategy:
+
+* Treat each word as a document
+* Determine similarities between each document
+* Determine the most natural clustering of these documents with hierarchical clustering
+* Find the best one-word clue for each cluster
+
+## Treat each word as a document
+
+I decided the document to represent each word should be the word's Wikipedia article. The text of each word's article was saved in `data/{word}.txt`.
+
+```{r}
+codenames = c(
+  "plate",
+  "eat",
+  "spoon",
+  "stream",
+  "water",
+  "oil",
+  "engine",
+  "gasoline"
+)
+
+spymaster = data.frame()
+
+for (word in codenames) {
+  filename = paste0("data/", word, ".txt")
+  text = readChar(filename, file.info(filename)$size)
+  spymaster = rbind(spymaster, data.frame(codeword = word, text = text))
+}
+```
+
+`spymaster` is a data.frame with two columns, the word and its article text.
+
+```{r}
+names(spymaster)
+```
+
+I can then use the `tm` package to build a corpus of each document's text.
+
+```{r, message=FALSE}
+library(tm)
+
+corpus = Corpus(VectorSource(spymaster$text))
+corpus
+```
+
+It is then straightforward to create a term-document matrix from this corpus.
+
+```{r}
+tdm = TermDocumentMatrix(corpus, 
+                         control = list(tolower = TRUE, removePunctuation = TRUE, stopwords = TRUE))
+
+tdm = as.matrix(tdm)
+colnames(tdm) = codenames
+
+tdm[sample(1:nrow(tdm), 5), ]
+```
+
+Each row is a term and each column is a document. The value in the matrix is the term's frequency of occurrence in the given document.
+
+## Determine similarities between each document
+
+To determine how similar one document is to another, I decided to calculate their [cosine similarities](https://en.wikipedia.org/wiki/Cosine_similarity) with the term-document matrix. Since each document is represented by a vector of term frequencies, we can determine the cosine similarity between each pair of documents with these vectors. In short, the more terms a pair of documents have in common, the higher their similarity. The cosine similarity between two documents $A$ and $B$ is defined as:
+
+$$similarity(A, B) = \frac{\sum_{i=1}^{n}A_iB_i}{\sqrt{\sum_{i=1}^{n}A_i^2}\sqrt{\sum_{i=1}^{n}B_i^2}}$$
+
+This is easy to compute with the `lsa` package, which provides a `cosine` function.
+
+```{r, message=FALSE}
+library(lsa)
+
+c = cosine(tdm)
+c
+```
+
+`c` is a matrix of cosine similarities. For example, the cosine similarity between `plate` and `spoon` is `r c["plate", "spoon"]`.
+
+## Determine the most natural clustering of these documents with hierarchical clustering
+
+With a document similarity matrix, we can use a clustering algorithm to figure out the best way to group these words. I decided to use hierarchical clustering, which expects a distance matrix. The Wikipedia article on cosine similarity suggests the following for converting cosine similarity to [angular distance](https://en.wikipedia.org/wiki/Cosine_similarity#Angular_distance_and_similarity):
+
+$$distance(A, B) = \frac{2 \cdot cos^{-1}(similarity(A, B))}{\pi}$$
+
+```{r}
+d = as.dist(2 * acos(c) / pi)
+d
+```
+
+`d` is a distance matrix of class `dist`. Passing this distance matrix to `hclust` will run the [hierarchical agglomerative clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering#Agglomerative_clustering_example) algorithm and produce a dendogram.
+
+```{r}
+tree = hclust(d)
+plot(tree)
+```
+
+In hierarchical agglomerative clustering, each observations starts in its own cluster and at each iteration one observation / cluster is joined with another until there is only one cluster. The tree above shows at what point these merges occurred. Where you cut this tree determines the clusters, and the `cutree` function allows us to cut the tree such that it produces $k$ clusters. The value of `cutree` is a named vector of cluster assignments. For example, if $k = 3$:
+
+```{r}
+cuts = cutree(tree, k = 3)
+cuts
+```
+
+We won't know $k$, so I decided to cut the tree for $k = 2$ through $k = 7$ to determine which $k$ produces the highest mean [silhouette](https://en.wikipedia.org/wiki/Silhouette_(clustering)) metric. The silhouette metric is defined for each observation $i$ as
+
+$$s(i) = \frac{b(i) - a(i)}{max(a(i), b(i))}$$
+
+where $a(i)$ is the average distance of observation $i$ from the rest of the observations in its cluster and $b(i)$ is the minimum mean distance between $i$ and another cluster. Silhouette values close to $1$ indicate the observation is in the correct cluster and values close to $-1$ indicate the observation belongs in another cluster.
+
+If we look at the silhouette results from the cut we made earlier, we can see how well each observation fits into its assigned cluster.
+
+```{r, message=FALSE}
+library(cluster)
+
+sil = silhouette(cuts, d)
+sil[1:8, ]
+```
+
+I use the mean value of `sil_width` to determine the "goodness of fit" for different values of $k$.
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+
+clusters = data.frame(k = 2:7) %>% 
+  group_by(k) %>% 
+  do(cuts = cutree(tree, .$k)) %>%
+  mutate(sil = mean(silhouette(cuts, d)[, "sil_width"]))
+
+clusters
+```
+
+With the highest mean value of `sil_width`, we can assign those cuts as the documents' clusters.
+
+```{r}
+best = clusters %>% ungroup %>% top_n(1, sil)
+
+best
+```
+
+```{r}
+spymaster$cluster = best$cuts[[1]]
+
+spymaster[, c("codeword", "cluster")]
+```
+
+## Find the best one-word clue for each cluster
+
+Now that I've determined a natural clustering of words, I need to find the best one-word clue to get Spymaster 2000's teammates to guess the words in a cluster. The candidates for clues are all the words in the original corpus minus the words that are against the rules; i.e. any words that are among the words on the board.
+
+```{r}
+terms = row.names(tdm)
+banned = vapply(terms, 
+                function(x) {any(grepl(x, codenames)) | 
+                             any(sapply(codenames, function(y) grepl(y, x)))}, 
+                logical(1))
+
+tdm = tdm[!banned, ]
+```
+
+My strategy here is to find clues that are the most concentrated in one cluster more than any other cluster and then, within that cluster, that are spread out the most evenly among the words in the cluster. To accomplish this I decided to use the [Herfindahl index](https://en.wikipedia.org/wiki/Herfindahl_index), which in the context of economics is a measure of competition among firms in a market based on their market shares. The more monopolistic the market, the higher the index, and the closer the market is to perfect competition, the lower the index. The Herfindahl index is calculated easily with
+
+$$H = \sum_{i=1}^{n} s_{i}^{2}$$
+
+where $s_i$ is the market share of firm $i$ in the market. This can be normalized such that it's between $0$ and $1$.
+
+$$H* = 
+\begin{cases}
+  \frac{H - 1/N}{1 - 1/N} & N > 1 \\
+  1 &  N = 1
+\end{cases}
+$$
+
+```{r}
+herfindahl_index = function(p) {
+  n = length(p)
+  if (n == 1) {return(0)}
+  h = sum(p ^ 2)
+  h_n = (h - 1 / n) / (1 - 1 / n)
+  return(h_n)
+}
+```
+
+Let `a` be a highly monopolistic market and `b` a market in nearly perfect competition. We can see the Herfindahl index is a good measure of concentration.
+
+```{r}
+a = c(0.9, 0.05, 0.04, 0.01)
+b = c(0.2, 0.3, 0.25, 0.25)
+
+herfindahl_index(a)
+herfindahl_index(b)
+```
+
+This index can easily be applied to my problem: I want to identify clues that are highly concentrated in one cluster but are evenly spread out across the words in that cluster. In other words, I want clues...
+
+With a high cross-cluster Herfindahl index, 
+
+$$
+H_{cluster}(c) = \sum_{i=1}^k \frac{r_{ci}}{r_{c}}
+$$
+
+where $r_{ci}$ is the number of occurrences of clue $c$ in cluster $i$ and $r_{c}$ is the total number of occurrences of clue $c$ across all $k$ clusters.
+
+And with a low cross-document-within-cluster Herfindahl index,
+
+$$
+H_{document}(c, i) = \sum_{j=1}^d \frac{r_{cj}}{r_{ci}}
+$$
+
+where $r_{cj}$ is the number of occurrences of clue $c$ in document $j$ and $r_{ci}$ is the total number of occurrences of clue $c$ across all $d$ documents in cluster $i$.
