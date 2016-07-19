@@ -10,17 +10,17 @@ comments: true
 
 A webhook POSTs to our database each time a particular event occurs on our website. We receive about two of these requests per minute. I was mindlessly monitoring the log files one day and noticed it had been roughly 90 seconds since our database had been hit by this request. Before worrying, though, I wondered how rare that observation is. What is the likelihood of waiting longer than 1.5 minutes for the next request?
 
-This is a probability problem that can be solved with an understanding of Poisson processes and the exponential distribution. A Poisson process is any process where independent events occur at constant known rate, e.g. babies are born at a hospital at a rate of three per hour, or calls come into a call center at a rate of 10 per minute. The exponential distribution is the probability distribution that models the waiting times between these events, e.g. the times between calls at the call center are exponentially distributed. To model Poisson processes and exponental distributions, we need to know two things: a time-unit \\(t\\) and a rate \\(\lambda\\). 
+This is a probability problem that can be solved with an understanding of Poisson processes and the exponential distribution. A Poisson process is any process where independent events occur at constant known rate, e.g. babies are born at a hospital at a rate of three per hour, or calls come into a call center at a rate of 10 per minute. The exponential distribution is the probability distribution that models the waiting times between these events, e.g. the times between calls at the call center are exponentially distributed. To model Poisson processes and exponental distributions, we need to know two things: a time-unit $t$ and a rate $\lambda$.
 
 ## Poisson Distribution
 
-Let's start with the Poisson distribution: If we let \\(N(t)\\) denote the number of events that occur between now and time \\(t\\), then the probability that \\(n\\) events occur within the next \\(t\\) time-units, or \\(P(N(t) = n)\\), is
+Let's start with the Poisson distribution: If we let $N(t)$ denote the number of events that occur between now and time $t$, then the probability that $n$ events occur within the next $t$ time-units, or $P(N(t) = n)$, is
 
 $$
   P(N(t) = n) = \frac{(\lambda t)^n e^{-\lambda t}}{n!}
 $$
 
-As mentioned earlier, we receive an average of 2 requests from this webhook per minute. Thus, the time-unit \\(t\\) is one minute and the rate \\(\lambda\\) is 2. Knowing these, we can answer questions such as:
+As mentioned earlier, we receive an average of 2 requests from this webhook per minute. Thus, the time-unit $t$ is one minute and the rate $\lambda$ is 2. Knowing these, we can answer questions such as:
 
 * What is the probability that we receive no requests in the next two minutes?
 
@@ -81,19 +81,19 @@ print pois.prob_at_least(2, 3)
 
 ## Exponential Distribution
 
-Let's move onto the exponential distribution. As mentioned earlier, the waiting times between events in a Poisson process are exponentially distributed. The exponential distribution can be derived from the Poisson distribution: Let \\(X\\) be the waiting time between now and the next event. The probability that \\(X\\) is greater than \\(t\\) is identical to the probability that 0 events occur between now and time \\(t\\), which we already know:
+Let's move onto the exponential distribution. As mentioned earlier, the waiting times between events in a Poisson process are exponentially distributed. The exponential distribution can be derived from the Poisson distribution: Let $X$ be the waiting time between now and the next event. The probability that $X$ is greater than $t$ is identical to the probability that 0 events occur between now and time $t$, which we already know:
 
 $$
 P(X > t) = P(N(t) = 0) = \frac{(\lambda t)^0 e^{-\lambda t}}{0!} = e^{-\lambda t}
 $$
 
-We also know that the probability of \\(X\\) being less than or equal to \\(t\\) is the complement of \\(X\\) being greater than \\(t\\):
+We also know that the probability of $X$ being less than or equal to $t$ is the complement of $X$ being greater than $t$:
 
 $$
 P(X \leq t) = 1 - P(X > t) = 1 - e^{-\lambda t}
 $$
 
-Thus, the distribution function of the waiting times between events in a Poisson process is \\(1 - e^{-\lambda t}\\). With this, and recalling that our time-unit \\(t\\) is one minute and our rate \\(\lambda\\) is 2 requests per minute, we can answer questions such as:
+Thus, the distribution function of the waiting times between events in a Poisson process is $1 - e^{-\lambda t}$. With this, and recalling that our time-unit $t$ is one minute and our rate $\lambda$ is 2 requests per minute, we can answer questions such as:
 
 * What is the probability that the next request occurs within 15 seconds?
 
@@ -167,7 +167,7 @@ print expo.prob_greater_than(1.5)
 0.0497870683679
 ```
 
-For this particular example, we could have answered the question with the Poisson distribution by finding \\(P(N(1.5) = 0))\\). 
+For this particular example, we could have answered the question with the Poisson distribution by finding $P(N(1.5) = 0))$.
 
 ```python
 print pois.prob_exactly(0, 1.5)
