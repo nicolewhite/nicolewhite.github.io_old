@@ -24,16 +24,16 @@ Originally, Cypher keywords were suggested simply in alphabetical order. However
     <td style="text-align:center;"><b>Exhibit C</b></td>
   </tr>
   <tr>
-    <td><img src="http://i.imgur.com/oXPzD5N.png" /></td>
-    <td><img src="http://i.imgur.com/H6cQE4Z.png" /></td>
-    <td><img src="http://i.imgur.com/wIwVous.png" /></td>
+    <td><img src="https://i.imgur.com/oXPzD5N.png" /></td>
+    <td><img src="https://i.imgur.com/H6cQE4Z.png" /></td>
+    <td><img src="https://i.imgur.com/wIwVous.png" /></td>
   </tr>
 </table>
 
 These are no good:
 
-* **Exhibit A** - `WHEN` is an invalid suggestion following a `MATCH` keyword. 
-* **Exhibit B** - Both `WHEN` and `WHERE` are invalid suggestions following a `CREATE` keyword. 
+* **Exhibit A** - `WHEN` is an invalid suggestion following a `MATCH` keyword.
+* **Exhibit B** - Both `WHEN` and `WHERE` are invalid suggestions following a `CREATE` keyword.
 * **Exhibit C** - This is the only example where the first keyword suggested is appropriate, but this is just by luck.
 
 For the examples above, people who are familiar with Cypher can tell you that out of the Cypher keywords that start with `W`, the `WHERE` and `WITH` keywords are most likely to follow the `MATCH` keyword, the `WITH` keyword is most likely to follow the `CREATE` keyword, and the `WHEN` keyword is most likely to follow the `CASE` keyword. For a better experience, typing a `W` should toggle an autocomplete menu where the order of the suggested keywords is a function of the most previous keyword in the query. So how do I implement this? I'm certainly not going to hardcode any of these rules into `cycli` manually; rather, I let the data speak for itself.
@@ -42,7 +42,7 @@ For the examples above, people who are familiar with Cypher can tell you that ou
 
 I scraped all Cypher queries from all of the GraphGists listed on the [GraphGist wiki](https://github.com/neo4j-contrib/graphgist/wiki). GraphGists are what I like to call the IPython notebook of Cypher: they allow you to build a sort of notebook with inline Cypher queries, where the results are rendered in the browser. This provided a good sample dataset of Cypher queries for building the Markov model.
 
-As you might've read in [a previous blog post](http://nicolewhite.github.io/2014/06/10/steady-state-transition-matrix.html) of mine:
+As you might've read in [a previous blog post](https://nicolewhite.github.io/2014/06/10/steady-state-transition-matrix.html) of mine:
 
 > A Markov process consists of states and probabilities, where the probability of transitioning from one state to another depends only on the current state and not on the past; it is _memoryless_. A Markov process is often depicted as a transition probability matrix, where the \\((i, j)\\) entry of this matrix is the probability that the Markov process transitions to state \\(j\\) given that the process is currently in state \\(i\\).
 
@@ -157,7 +157,7 @@ for query in queries:
         next_keyword = positions[i + 1]
 
         markov[current_keyword][next_keyword] += 1
-        
+
 print(markov)
 ```
 
@@ -292,7 +292,7 @@ for word in markov.keys():
     markov[word] = ordered
 ```
 
-Now I have a data structure that can tell me which keywords are most likely to be used next given the current keyword. For example, with this pretend dataset, if the current keyword is `MATCH`, then the probability of the next keyword being `WHERE` is 67% and the probability of the next keyword being `WITH` is 33%: 
+Now I have a data structure that can tell me which keywords are most likely to be used next given the current keyword. For example, with this pretend dataset, if the current keyword is `MATCH`, then the probability of the next keyword being `WHERE` is 67% and the probability of the next keyword being `WITH` is 33%:
 
 ```python
 for state in markov["MATCH"]:
@@ -310,7 +310,7 @@ for state in markov["MATCH"]:
 
 ## Ship It!
 
-This workflow was applied to the full sample of Cypher queries scraped from the GraphGists wiki and the resulting data structure, the dictionary of tuples, is now included in `cycli` to make smarter autocomplete suggestions for Cypher keywords. 
+This workflow was applied to the full sample of Cypher queries scraped from the GraphGists wiki and the resulting data structure, the dictionary of tuples, is now included in `cycli` to make smarter autocomplete suggestions for Cypher keywords.
 
 Let's look at the real data for a few keywords.
 
@@ -380,15 +380,15 @@ Revisiting the examples from earlier, where typing a `W` in previous versions of
     <td style="text-align:center;"><b>Exhibit C</b></td>
   </tr>
   <tr>
-    <td><img src="http://i.imgur.com/yZkY93P.png" /></td>
-    <td><img src="http://i.imgur.com/a8MHS8H.png" /></td>
-    <td><img src="http://i.imgur.com/TumZkT2.png" /></td>
+    <td><img src="https://i.imgur.com/yZkY93P.png" /></td>
+    <td><img src="https://i.imgur.com/a8MHS8H.png" /></td>
+    <td><img src="https://i.imgur.com/TumZkT2.png" /></td>
   </tr>
 </table>
 
 Much better:
 
-* **Exhibit A** - `WHERE` and `WITH` are appropriate suggestions to follow a `MATCH` keyword and are ordered correctly, as `WHERE` is more likely to follow than `WITH`. 
+* **Exhibit A** - `WHERE` and `WITH` are appropriate suggestions to follow a `MATCH` keyword and are ordered correctly, as `WHERE` is more likely to follow than `WITH`.
 * **Exhibit B** - In the case of the `CREATE` keyword, `WITH` is the best suggestion as both `WHEN` and `WHERE` are invalid.
 * **Exhibit C** - `WHEN` is the only valid suggestion for a keyword following the `CASE` keyword.
 
@@ -437,7 +437,7 @@ WHERE 0.0
 
 While `cycli` is only utilizing the one-step probabilities in this Markov process, I wanted to build this data structure to open the door for some fun, offline analysis of the Cypher query language. With a Markov chain, I can answer questions like:
 
-* What is the [steady state distribution](http://nicolewhite.github.io/2014/06/10/steady-state-transition-matrix.html) of a Cypher query?
+* What is the [steady state distribution](https://nicolewhite.github.io/2014/06/10/steady-state-transition-matrix.html) of a Cypher query?
 * What is the expected number of steps until a user reaches the `COLLECT` state?
 * Given that a user is currently in the `MATCH` state, what is the expected number of steps until the user returns to the `MATCH` state?
 
