@@ -61,13 +61,15 @@ I decided the document to represent each codename should be the word's Wikipedia
 
 
 ```r
-spymaster = data.frame()
-
-for (codename in red_codenames) {
-  filename = paste0("data/", codename, ".txt")
-  text = readChar(filename, file.info(filename)$size)
-  spymaster = rbind(spymaster, data.frame(codename = codename, text = text))
+# Thank you to /u/guepier for updates to this code.
+# https://www.reddit.com/r/rstats/comments/4tnmv3/codenames_playing_spymaster_with_r/d5jd69d
+read_definition = function (codename) {
+    filename = paste0("data/", codename, ".txt")
+    readChar(filename, file.info(filename)$size)
 }
+
+spymaster = data.frame(codename = red_codenames,
+                       text = vapply(red_codenames, read_definition, character(1)))
 ```
 
 `spymaster` is a data.frame with two columns, the codename and its article text.
@@ -78,15 +80,15 @@ apply(spymaster, 2, function(x) {substr(x, 1, 50)})
 ```
 
 ```
-##   codename   text                                                
-## 1 "water"    "Water (chemical formula: H2O) is a transparent flu"
-## 2 "plate"    "A roundel is a circular charge in heraldry. Rounde"
-## 3 "oil"      "An oil is any neutral, nonpolar chemical substance"
-## 4 "eat"      "Eating (also known as consuming) is the ingestion "
-## 5 "stream"   "A stream is a body of water with a current, confin"
-## 6 "gasoline" "Gasoline /ˈɡæsəliːn/, also known as petrol /ˈpɛtrə"
-## 7 "engine"   "An engine or motor is a machine designed to conver"
-## 8 "spoon"    "A spoon is a utensil consisting of a small shallow"
+##          codename   text                                                
+## water    "water"    "Water (chemical formula: H2O) is a transparent flu"
+## plate    "plate"    "A roundel is a circular charge in heraldry. Rounde"
+## oil      "oil"      "An oil is any neutral, nonpolar chemical substance"
+## eat      "eat"      "Eating (also known as consuming) is the ingestion "
+## stream   "stream"   "A stream is a body of water with a current, confin"
+## gasoline "gasoline" "Gasoline /ˈɡæsəliːn/, also known as petrol /ˈpɛtrə"
+## engine   "engine"   "An engine or motor is a machine designed to conver"
+## spoon    "spoon"    "A spoon is a utensil consisting of a small shallow"
 ```
 
 I can then use the `tm` package to build a corpus of each document's text. I also want to include the assassin word's document text in the corpus as it will be relevant later when choosing clues.
@@ -95,8 +97,7 @@ I can then use the `tm` package to build a corpus of each document's text. I als
 ```r
 library(tm)
 
-filename = paste0("data/", assassin, ".txt")
-assassin_df = data.frame(codename = assassin, text = readChar(filename, file.info(filename)$size))
+assassin_df = data.frame(codename = assassin, text = read_definition(assassin))
 
 corpus = Corpus(VectorSource(rbind(spymaster, assassin_df)$text))
 corpus
@@ -123,13 +124,13 @@ tdm[sample(1:nrow(tdm), 5), ]
 ```
 
 ```
-##               Docs
-## Terms          water plate oil eat stream gasoline engine spoon fire
-##   ingredients      1     0   0   0      0        0      0     4    0
-##   civilization     3     0   0   0      0        0      0     1    0
-##   peroxide         0     0   0   0      0        0      1     0    0
-##   outsized         0     0   0   0      0        0      1     0    0
-##   featured         0     1   0   0      0        0      0     0    0
+##              Docs
+## Terms         water plate oil eat stream gasoline engine spoon fire
+##   extend          0     0   0   0      0        1      0     0    0
+##   attributing     1     0   0   0      0        0      0     0    0
+##   usaaf           0     0   0   0      0        1      0     0    0
+##   olefins         0     0   0   0      0        6      0     0    0
+##   occurring       1     0   0   0      0        1      0     0    1
 ```
 
 Each row is a term and each column is a document. The value in the matrix is the term's frequency of occurrence in the given document.
@@ -313,15 +314,15 @@ select(spymaster, codename, cluster)
 ```
 
 ```
-##   codename cluster
-## 1    water       1
-## 2    plate       2
-## 3      oil       3
-## 4      eat       2
-## 5   stream       1
-## 6 gasoline       3
-## 7   engine       3
-## 8    spoon       2
+##          codename cluster
+## water       water       1
+## plate       plate       2
+## oil           oil       3
+## eat           eat       2
+## stream     stream       1
+## gasoline gasoline       3
+## engine     engine       3
+## spoon       spoon       2
 ```
 
 I can visualize these cluster assignments with [multidimensional scaling](https://en.wikipedia.org/wiki/Multidimensional_scaling#Classical_multidimensional_scaling), which will allow me to visualize the distance matrix in two dimensions using `cmdscale()`.

@@ -64,13 +64,15 @@ assassin = "fire"
 I decided the document to represent each codename should be the word's Wikipedia article. The text of each word's article was saved in `data/{word}.txt`.
 
 ```{r, message=FALSE, warning=FALSE}
-spymaster = data.frame()
-
-for (codename in red_codenames) {
-  filename = paste0("data/", codename, ".txt")
-  text = readChar(filename, file.info(filename)$size)
-  spymaster = rbind(spymaster, data.frame(codename = codename, text = text))
+# Thank you to /u/guepier for updates to this code.
+# https://www.reddit.com/r/rstats/comments/4tnmv3/codenames_playing_spymaster_with_r/d5jd69d
+read_definition = function (codename) {
+    filename = paste0("data/", codename, ".txt")
+    readChar(filename, file.info(filename)$size)
 }
+
+spymaster = data.frame(codename = red_codenames,
+                       text = vapply(red_codenames, read_definition, character(1)))
 ```
 
 `spymaster` is a data.frame with two columns, the codename and its article text.
@@ -84,8 +86,7 @@ I can then use the `tm` package to build a corpus of each document's text. I als
 ```{r, message=FALSE, warning=FALSE}
 library(tm)
 
-filename = paste0("data/", assassin, ".txt")
-assassin_df = data.frame(codename = assassin, text = readChar(filename, file.info(filename)$size))
+assassin_df = data.frame(codename = assassin, text = read_definition(assassin))
 
 corpus = Corpus(VectorSource(rbind(spymaster, assassin_df)$text))
 corpus
